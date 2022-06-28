@@ -485,9 +485,7 @@ class Repository extends HTMLElement {
     <div class="movie_header">
       <img class="locandina"  src=""/>
       <h1>Error: ${Error}</h1>
-      <h4></h4>
-      <span class="minutes"></span>
-      <p class="type"></p>
+     
     </div>
     <div class="movie_desc">
       <p class="text">
@@ -496,7 +494,14 @@ class Repository extends HTMLElement {
     </div>
   
   </div>
-  <div class="blur_back"></div>
+  <div class="blur_back" style="background:url(https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg); background-size: cover;
+  
+     background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    left:33%;
+  
+    "   ></div>
 </div>
 
     
