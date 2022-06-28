@@ -7,17 +7,32 @@ class Repository extends HTMLElement {
     this.name = this.getAttribute("name");
     
     
-   
+    this.type = this.getAttribute("type");
     
-    var MovieName = this.name.split('(')[0]
+    var EndPoint = ""
+      var MovieName = this.name.split('(')[0]
     
     var Year = this.name.substring(
     this.name.indexOf("(") + 1, 
     this.name.lastIndexOf(")")
 );
+     if (this.type == undefined){
+    
+     EndPoint = `https://api.themoviedb.org/3/search/movie?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&year=${Year}`
+    
+    }
+    
+      if (this.type == "TV"){
+    
+     EndPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&year=${Year}`
+    
+    }
+   
+    
+  
     
     
-    this.endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&year=${Year}`;
+    this.endpoint = EndPoint;
     this.getDetails = this.getDetails.bind(this);
 
     this.innerHTML = `<h1>Loading</h1>`;
@@ -98,10 +113,30 @@ html, body {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
-.movie_card .info_section .movie_header .type {
+
+.movie_card .info_section .movie_header .empty-span {
+    display: inline-block;
+    margin-top: 15px;
+    color: #555;
+    padding: 5px;
+    margin-left:-14px;
+}
+
+.movie_card .info_section .movie_header .empty-space {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.movie_card .info_section .movie_header .show-minutes {
   display: inline-block;
   color: #959595;
   margin-left: 10px;
+}
+
+.movie_card .info_section .movie_header .no-minutes {
+  display: inline-block;
+  color: #959595;
 }
 .movie_card .info_section .movie_header .locandina {
   position: relative;
@@ -265,7 +300,13 @@ html, body {
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.13);
 }
-.movie_card .info_section .movie_header .type {
+.movie_card .info_section .movie_header .show-minutes {
+  display: inline-block;
+  color: #cee4fd;
+  margin-left: 10px;
+}
+
+.movie_card .info_section .movie_header .no-minutes {
   display: inline-block;
   color: #cee4fd;
   margin-left: 10px;
@@ -457,8 +498,10 @@ html, body {
     `;
   }
 
-  cardTemplate({ results}) {
-    	for (var k in results[0].title) {
+  cardTemplate({ page, results}) {
+    
+    if (this.type == undefined){
+      	for (var k in results[0].title) {
 		var Movie = results[0].title
     var Description = results[0].overview
 
@@ -466,6 +509,9 @@ html, body {
      var BackdropPath = "https://image.tmdb.org/t/p/w500" +  results[0].backdrop_path
      
      var Released_In_Year = results[0].release_date.split('-')[0]
+     
+     var P_ClassType = "show-minutes"
+     var Minutes = `<span class="minutes">136 min</span>`
  //   var Genre = results[0].genre_ids
     
    // var array = Genre + ""
@@ -478,6 +524,22 @@ html, body {
      
    /*  {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]} */
 	}
+    
+    
+    }
+    
+      if (this.type == "TV"){
+        var Movie =  results[0].name
+        var Description =  results[0].overview
+         var PosterPath = "https://image.tmdb.org/t/p/w500" + results[0].poster_path
+     var BackdropPath = "https://image.tmdb.org/t/p/w500" +  results[0].backdrop_path
+     
+     var Released_In_Year = results[0].first_air_date.split('-')[0]
+        var Minutes = `<span class="empty-span"></span>`
+        var P_ClassType = "no-minutes"
+      }
+    
+   
     return `
    
 <div class="movie_card" id="bright">
@@ -485,13 +547,14 @@ html, body {
     <div class="movie_header">
       <img class="locandina"  src="${PosterPath}"/>
       <h1>${Movie}</h1>
-      <h4>${Released_In_Year}, David Ayer</h4>
-      <span class="minutes">136 min</span>
-      <p class="type">Action, Science Fiction</p>
+      <h4>${Released_In_Year}</h4>
+      ${Minutes}
+      <p class="${P_ClassType}">Action, Science Fiction</p>
     </div>
     <div class="movie_desc">
       <p class="text">
         ${Description}
+       
       </p>
     </div>
   
