@@ -309,7 +309,32 @@ html, body {
 .movie_card .info_section .movie_header .no-minutes {
   display: inline-block;
   color: #cee4fd;
+  margin-left: 0px;
+}
+
+.movie_card .info_section .movie_header .empty-span {
+    display: inline-block;
+    margin-top: 15px;
+    color: #555;
+    padding: 5px;
+    margin-left:-14px;
+}
+
+.movie_card .info_section .movie_header .empty-space {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.movie_card .info_section .movie_header .show-minutes {
+  display: inline-block;
+      color: #cee4fd;
   margin-left: 10px;
+}
+
+.movie_card .info_section .movie_header .no-minutes {
+  display: inline-block;
+      color: #cee4fd;
 }
 .movie_card .info_section .movie_header .locandina {
   position: relative;
