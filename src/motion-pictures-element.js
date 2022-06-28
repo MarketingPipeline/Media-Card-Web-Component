@@ -24,7 +24,7 @@ class Repository extends HTMLElement {
     
       if (this.type == "TV"){
     
-     EndPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&year=${Year}`
+     EndPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&first_air_date_year=${Year}`
     
     }
    
