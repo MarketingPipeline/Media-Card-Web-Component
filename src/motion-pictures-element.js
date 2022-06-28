@@ -58,21 +58,10 @@ class Repository extends HTMLElement {
   box-sizing: border-box;
   margin: 0;
 }
-html, body {
-  margin: 0;
-  background: white;
+.movie_card {
   font-family: 'Montserrat', helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
-}
-.link {
-  display: block;
-  text-align: center;
-  color: #777;
-  text-decoration: none;
-  padding: 10px;
-}
-.movie_card {
   position: relative;
   display: block;
   width: 800px;
@@ -151,6 +140,8 @@ html, body {
 }
 .movie_card .info_section .movie_desc .text {
   color: #545454;
+  
+  font-size: 0.7vw;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
@@ -223,15 +214,7 @@ html, body {
     display: inline-grid;
   }
 }
-.bright_back {
-  background: url("https://occ-0-2433-448.1.nflxso.net/art/cd5c9/3e192edf2027c536e25bb5d3b6ac93ced77cd5c9.jpg");
-}
-.tomb_back {
-  background: url("https://fsmedia.imgix.net/cd/c9/5e/ba/4817/4d9a/93f0/c776ec32ecbc/lara-crofts-neck-looks-unnatural-in-the-new-poster-for-tomb-raider.png");
-}
-.ave_back {
-  background: url("https://www.gannett-cdn.com/-mm-/c03fd140debe8ad4c05cf81a5cad7ad61a12ce52/c=0-1580-2985-3266&r=x803&c=1600x800/local/-/media/2017/06/09/USATODAY/USATODAY/636326272873599176-Black-Panther-Teaser.jpg");
-}`
+`
 
      
     if (Style == undefined){
@@ -250,13 +233,7 @@ html, body {
   box-sizing: border-box;
   margin: 0;
 }
-html, body {
-  margin: 0;
-  background: black;
-  font-family: 'Montserrat', helvetica, arial, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}
+
 .movie_card {
   position: relative;
   display: block;
@@ -266,11 +243,11 @@ html, body {
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
+  font-family: 'Montserrat', helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
-.movie_card:hover {
-  transform: scale(1.02);
-  transition: all 0.4s;
-}
+
 .movie_card .info_section {
   position: relative;
   width: 100%;
@@ -349,6 +326,7 @@ html, body {
 }
 .movie_card .info_section .movie_desc .text {
   color: #cfd6e1;
+    font-size: 0.7vw;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
@@ -492,7 +470,7 @@ html, body {
     
     if (status_message == undefined){
       
-      var Error = "Movie Not Found"
+      var Error = "Movie / TV Show Not Found"
     } else {
       
       var Error = status_message
@@ -589,7 +567,7 @@ html, body {
      background-size:     cover;                      /* <------ */
     background-repeat:   no-repeat;
     background-position: center center; 
-    left:30%;
+    left:33%;
     "    ></div>
 </div>
 
