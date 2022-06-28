@@ -597,4 +597,4 @@ html, body {
   }
 }
 
-window.customElements.define("github-repo", Repository);
+window.customElements.define("motion-picture", Repository);
