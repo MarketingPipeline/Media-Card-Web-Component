@@ -71,6 +71,7 @@ class Repository extends HTMLElement {
   border-radius: 10px;
   transition: all 0.4s;
   box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+  text-align:left;
 }
 
 .movie_card .info_section {
@@ -141,7 +142,7 @@ class Repository extends HTMLElement {
 .movie_card .info_section .movie_desc .text {
   color: #545454;
   
-  font-size: 0.7vw;
+  font-size: 0.69vw;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
@@ -246,6 +247,7 @@ class Repository extends HTMLElement {
   font-family: 'Montserrat', helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
+  text-align:left;
 }
 
 .movie_card .info_section {
@@ -326,7 +328,7 @@ class Repository extends HTMLElement {
 }
 .movie_card .info_section .movie_desc .text {
   color: #cfd6e1;
-    font-size: 0.7vw;
+    font-size: 0.69vw;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
