@@ -16,6 +16,7 @@ class Repository extends HTMLElement {
     this.name.indexOf("(") + 1, 
     this.name.lastIndexOf(")")
 );
+   
      if (this.type == undefined){
     
      EndPoint = `https://api.themoviedb.org/3/search/movie?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&year=${Year}`
@@ -25,7 +26,7 @@ class Repository extends HTMLElement {
       if (this.type == "TV"){
     
      EndPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${MovieName}&first_air_date_year=${Year}`
-    
+  //  console.log(EndPoint)
     }
    
     
@@ -508,20 +509,37 @@ class Repository extends HTMLElement {
     `;
   }
 
-  cardTemplate({ page, results}) {
+  cardTemplate({Count, page, results}) {
     
     if (this.type == undefined){
-      	for (var k in results[0].title) {
+     
 		var Movie = results[0].title
     var Description = results[0].overview
-
+    	var id = results[0].id
+    //  console.log(id)
      var PosterPath = "https://image.tmdb.org/t/p/w500" + results[0].poster_path
      var BackdropPath = "https://image.tmdb.org/t/p/w500" +  results[0].backdrop_path
      
      var Released_In_Year = results[0].release_date.split('-')[0]
      
-     var P_ClassType = "show-minutes"
-     var Minutes = `<span class="minutes">136 min</span>`
+     
+     //// NEED TO FETCH MOVIE RUN TIMES + GENRES
+          //fetch(`https://api.themoviedb.org/3/movie/${results[0].id}?api_key=249f222afb1002186f4d88b2b5418b55`)
+   // .then(function(response) {
+     // return response.json();
+   // })
+    //.then(function(result) {
+         //var RunTime = result.runtime
+         
+         // var Genres = result.genres
+        // console.log(Genres)  
+       //  console.log(RunTime)
+            
+            
+     //  })
+     
+     //var P_ClassType = "show-minutes"
+   //  var Minutes = `<span class="minutes">136 min</span>`
  //   var Genre = results[0].genre_ids
     
    // var array = Genre + ""
@@ -533,10 +551,13 @@ class Repository extends HTMLElement {
      //}
      
    /*  {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]} */
+     
+
+     
 	}
     
     
-    }
+   
     
       if (this.type == "TV"){
         var Movie =  results[0].name
@@ -549,10 +570,20 @@ class Repository extends HTMLElement {
         var P_ClassType = "no-minutes"
       }
     
-   
+     var Count = 0 
+    for (var k in this.name) {
+      Count = Count + 1
+      
+      
+    
+    
+      
+    }
+    
+       
     return `
    
-<div class="movie_card" id="bright">
+<div class="movie_card" id="movie_element_${Count}">
   <div class="info_section">
     <div class="movie_header">
       <img class="locandina"  src="${PosterPath}"/>
