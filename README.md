@@ -49,7 +49,7 @@ You can view a demo of Fork-Me.js in use [here.](https://marketingpipeline.githu
 	 
    
 ```html
- <motion-picture name="The Mask (1994)"></motion-picture>
+ <media-element name="The Mask (1994)"></media-element>
 ```
 
 Note: For movies & TV show a API Key is required from TheMovieDB, songs do NOT require a API key.
@@ -77,7 +77,7 @@ After getting your API key (if required) place it in your HTML document like so
 
 	   
 	
-<b><i>Note:</b></i> You can use as many single repo cards as you want!	
+<b><i>Note:</b></i> You can show as many movies as you want!
 	
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
@@ -92,16 +92,37 @@ After getting your API key (if required) place it in your HTML document like so
 ### Usage
 	 
    
-    <github-repo repo="MarketingPipeline/Simply-Docs"> </github-repo> 
+```html
+ <media-element name="The Mask (1994)" type="TV"></media-element>
+```
+
+Note: To display TV show(s) - you will require a API key from TheMovieDB.
+
+After getting your API key place it in your HTML document like so 
+
+```js
+<script>
+ var TheMovieDB_APIKey = "YOUR API KEY HERE"
+ </scrip>
+```
+
+
+
+
+
+   include this [script](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+         
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+
+
+
      
 
 
+	   
 	
+<b><i>Note:</b></i> You can show as many TV show's as you want
 
-    
-	
-<b><i>Note:</b></i> You can use as many single repo cards as you want!	
-	
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
 
@@ -116,16 +137,33 @@ After getting your API key (if required) place it in your HTML document like so
 	
 ### Usage
 	 
-   
-    <github-repo repo="MarketingPipeline/Simply-Docs"> </github-repo> 
+
+```html
+ <media-element name="The Beatles In My Life" type="song"></media-element>
+```
+
+Note: You do NOT need a API key to display songs.
+
+
+
+
+
+
+
+
+   include this [script](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+         
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+
+
+
      
 
 
+	   
 	
-   
-	
-<b><i>Note:</b></i> You can use as many single repo cards as you want!	
-	
+<b><i>Note:</b></i> You show as many song's as you want
+
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
 
