@@ -33,9 +33,23 @@ A custom web element to easily show off your favorite movies, TV shows & songs!
 You can view a demo of Fork-Me.js in use [here.](https://marketingpipeline.github.io/Fork-Me.js)
 
 
-How to use <b><i>Fork-Me.js</b></i>:
 
 
+
+	
+ <br>
+<details><summary>How to use <b>Media-Element.js</b>:</summary>
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>Show a <b>Movie</b>:</summary>
+	
+### Usage
+	 
+   
 ```html
  <motion-picture name="The Mask (1994)"></motion-picture>
 ```
@@ -60,9 +74,72 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 
+     
 
 
-###                                                                                                                    Options
+	   
+	
+<b><i>Note:</b></i> You can use as many single repo cards as you want!	
+	
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>Show a <b>TV Show</b>:</summary>
+	
+### Usage
+	 
+   
+    <github-repo repo="MarketingPipeline/Simply-Docs"> </github-repo> 
+     
+
+
+	
+
+    
+	
+<b><i>Note:</b></i> You can use as many single repo cards as you want!	
+	
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>Show a <b>Song</b>:</summary>
+	
+### Usage
+	 
+   
+    <github-repo repo="MarketingPipeline/Simply-Docs"> </github-repo> 
+     
+
+
+	
+   
+	
+<b><i>Note:</b></i> You can use as many single repo cards as you want!	
+	
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+</details>
+
+
+
+
+
+
+####                                                                                                                    Options
 
 
 <table>
