@@ -1,8 +1,8 @@
-class Repository extends HTMLElement {
+class Media_Details extends HTMLElement {
   constructor() {
     super();
 
-    this.repoDetails = null;
+    this.mediaElementDetails = null;
 
     this.name = this.getAttribute("name");
     
@@ -40,8 +40,8 @@ class Repository extends HTMLElement {
   }
 
   async connectedCallback() {
-    let repo = await this.getDetails();
-    this.repoDetails = repo;
+    let mediaElement = await this.getDetails();
+    this.mediaElementDetails = mediaElement;
     this.initShadowDom();
   }
 
@@ -74,7 +74,6 @@ class Repository extends HTMLElement {
   box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
   text-align:left;
 }
-
 .movie_card .info_section {
   position: relative;
   width: 100%;
@@ -104,7 +103,6 @@ class Repository extends HTMLElement {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
-
 .movie_card .info_section .movie_header .empty-span {
     display: inline-block;
     margin-top: 15px;
@@ -112,19 +110,16 @@ class Repository extends HTMLElement {
     padding: 5px;
     margin-left:-14px;
 }
-
 .movie_card .info_section .movie_header .empty-space {
     display: inline-block;
     margin-top: 15px;
     padding: 5px;
 }
-
 .movie_card .info_section .movie_header .show-minutes {
   display: inline-block;
   color: #959595;
   margin-left: 10px;
 }
-
 .movie_card .info_section .movie_header .no-minutes {
   display: inline-block;
   color: #959595;
@@ -235,7 +230,6 @@ class Repository extends HTMLElement {
   box-sizing: border-box;
   margin: 0;
 }
-
 .movie_card {
   position: relative;
   display: block;
@@ -250,7 +244,6 @@ class Repository extends HTMLElement {
   font-weight: 400;
   text-align:left;
 }
-
 .movie_card .info_section {
   position: relative;
   width: 100%;
@@ -285,13 +278,11 @@ class Repository extends HTMLElement {
   color: #cee4fd;
   margin-left: 10px;
 }
-
 .movie_card .info_section .movie_header .no-minutes {
   display: inline-block;
   color: #cee4fd;
   margin-left: 0px;
 }
-
 .movie_card .info_section .movie_header .empty-span {
     display: inline-block;
     margin-top: 15px;
@@ -299,19 +290,16 @@ class Repository extends HTMLElement {
     padding: 5px;
     margin-left:-14px;
 }
-
 .movie_card .info_section .movie_header .empty-space {
     display: inline-block;
     margin-top: 15px;
     padding: 5px;
 }
-
 .movie_card .info_section .movie_header .show-minutes {
   display: inline-block;
       color: #cee4fd;
   margin-left: 10px;
 }
-
 .movie_card .info_section .movie_header .no-minutes {
   display: inline-block;
       color: #cee4fd;
@@ -440,15 +428,15 @@ class Repository extends HTMLElement {
   }
 
   get template() {
-    let repo = this.repoDetails;
-    if (repo.total_results === 0) {
-      return this.style + this.cardError(repo);
+    let mediaElement = this.mediaElementDetails;
+    if (mediaElement.total_results === 0) {
+      return this.style + this.cardError(mediaElement);
     } 
     
-    if (repo.status_message) {
-      return this.style + this.cardError(repo);
+    if (mediaElement.status_message) {
+      return this.style + this.cardError(mediaElement);
     } else {
-      return this.style + this.cardTemplate(repo);
+      return this.style + this.cardTemplate(mediaElement);
     }
   }
 
@@ -504,7 +492,6 @@ class Repository extends HTMLElement {
   
     "   ></div>
 </div>
-
     
     `;
   }
@@ -538,8 +525,8 @@ class Repository extends HTMLElement {
             
      //  })
      
-     //var P_ClassType = "show-minutes"
-   //  var Minutes = `<span class="minutes">136 min</span>`
+     var P_ClassType = "show-minutes"
+    var Minutes = `<span class="minutes">136 min</span>`
  //   var Genre = results[0].genre_ids
     
    // var array = Genre + ""
@@ -608,9 +595,8 @@ class Repository extends HTMLElement {
     left:33%;
     "    ></div>
 </div>
-
     `;
   }
 }
 
-window.customElements.define("motion-picture", Repository);
+window.customElements.define("media-element", Media_Details);
