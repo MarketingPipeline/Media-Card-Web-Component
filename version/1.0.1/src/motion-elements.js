@@ -1,8 +1,8 @@
-class Repository extends HTMLElement {
+class Media_Details extends HTMLElement {
   constructor() {
     super();
 
-    this.repoDetails = null;
+    this.mediaElementDetails = null;
 
     this.name = this.getAttribute("name");
     
@@ -44,8 +44,8 @@ class Repository extends HTMLElement {
   }
 
   async connectedCallback() {
-    let repo = await this.getDetails();
-    this.repoDetails = repo;
+    let mediaElement = await this.getDetails();
+    this.mediaElementDetails = mediaElement;
     this.initShadowDom();
   }
 
@@ -153,7 +153,8 @@ class Repository extends HTMLElement {
 .movie_card .info_section .movie_desc .text {
   color: #545454;
   
-  font-size: 0.69vw;
+    display: block;
+  font-size: 0.86rem;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
@@ -452,19 +453,19 @@ class Repository extends HTMLElement {
   }
 
   get template() {
-    let repo = this.repoDetails;
-    if (repo.total_results === 0) {
-      return this.style + this.cardError(repo);
+    let mediaElement = this.mediaElementDetails;
+    if (mediaElement.total_results === 0) {
+      return this.style + this.cardError(mediaElement);
     } 
     
     
     
     
     
-    if (repo.status_message) {
-      return this.style + this.cardError(repo);
+    if (mediaElement.status_message) {
+      return this.style + this.cardError(mediaElement);
     } else {
-      return this.style + this.cardTemplate(repo);
+      return this.style + this.cardTemplate(mediaElement);
     }
   }
 
@@ -723,4 +724,4 @@ class Repository extends HTMLElement {
   }
 }
 
-window.customElements.define("motion-picture", Repository);
+window.customElements.define("media-element", Media_Details);
