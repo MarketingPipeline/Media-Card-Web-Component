@@ -129,14 +129,6 @@ After getting your API key (if required) place it in your HTML document like so
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
 
-
-</details>
-
-
-
-
-
-
 ####                                                                                                                    Options
 
 
@@ -172,6 +164,16 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 </table>
+	
+	
+</details>
+
+
+
+
+
+
+
 
 
 
