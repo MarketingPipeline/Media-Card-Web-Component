@@ -73,67 +73,26 @@ After getting your API key (if required) place it in your HTML document like so
 <th>Required</th>
 </tr>
 <tr>
-<td>link</td>
-<td>The      link                                                               to your GitHub  repo / source code etc...</td>
+<td>name</td>
+<td>The movie, TV show or song name you would like to show</td>
 <td><code>undefined</code></td>
 <td>Yes</td>
 </tr>
 
 
 <tr>
-<td>side</td>
-              <td>Change the side of the ribbon, options are <code>top-left, top-right, bottom-right, bottom-left </code></td>
-<td><code>top-right</code></td>
+<td>type</td>
+              <td>Type of Media to show details for - options:<code>TV, Song</code>, by default movie type will be shown.</td>
+<td><code>Movie</code></td>
 <td>No</td>
 </tr>
 
 <tr>
-<td>message</td>
-<td>Set                            your                     own      custom message instead   of  "Fork  me  on  GitHub" </td>
-<td><code>undefined</code></td>
+<td>theme</td>
+<td>Set a different color theme - options <code>dark</code></td>
+<td><code>light</code></td>
 <td>No</td>
 </tr>
-
-
-<tr>
-<td>color</td>
-<td>Change the   color  of the ribbon  background </td>
-<td><code>red</code></td>
-<td>No</td>
-</tr>
-
-
-
-<tr>
-<td>text-color</td>
-<td>Change  the   text  color of the ribbon</td>
-<td><code>#fff</code></td>
-<td>No</td>
-</tr>
-
-
-
-<tr>
-<td>new-window</td>
-<td>If                    <code>True</code>, link with  open in a new window</td>
-<td><code>False</code></td>
-<td>No</td>
-</tr>
-
-     
-      
-  
-<tr>
-<td>fixed</td>
-<td>If <code>False</code>  non fixed CSS will be applied</td>
-<td><code>True</code></td>
-<td>No</td>
-</tr>
-    
-      
-      
- 
-
 
 
 
