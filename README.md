@@ -219,7 +219,7 @@ Note: You do NOT need a API key to display songs.
 Want to improve this project? Create a pull request with detailed changes / improvements! If approved you will be added to the list of contributors of this awesome project!
 
 See also the list of
-[contributors](https://github.com/MarketingPipeline/Markdown-Tag/graphs/contributors) who
+[contributors](https://github.com/MarketingPipeline/Media-Element.js/graphs/contributors) who
 participate in this project.
 
 ## License ![GitHub](https://img.shields.io/github/license/MarketingPipeline/Media-Element.js)
