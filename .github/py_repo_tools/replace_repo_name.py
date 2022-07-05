@@ -1,7 +1,11 @@
-text = 'bat ball'
+# Define the filename here you want to replace content in
+FileName = "README.md"
 
-# replace b with c
-replaced_text = text.replace('b', 'c')
-print(replaced_text)
-
-# Output: cat call
+with open(FileName, 'r') as f:
+    contents = f.read()
+    # Define the first line where your content will be replaced / added 
+    contents = contents.replace('MarketingPipeline/Fork-Me', 'MarketingPipeline/Media-Element')
+    
+with open(FileName, 'w') as f:
+    f.write(contents)   
+    
