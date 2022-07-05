@@ -1,7 +1,7 @@
 # Media-Element.js
 
 <div align="center"
-<a href="https://github.com/MarketingPipeline/Fork-Me.js" class="ui-container"
+<a href="https://github.com/MarketingPipeline/Media-Element.js" class="ui-container"
       ><img height="300px"
        src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"
     /> </img></a> 
@@ -13,11 +13,11 @@
   <br>
   <small> <b><i>Show your support!</i> </b></small>
   <br>
-   <a href="https://github.com/MarketingPipeline/Fork-Me.js">
-    <img title="Star on GitHub" src="https://img.shields.io/github/stars/MarketingPipeline/Fork-Me.js.svg?style=social&label=Star">
+   <a href="https://github.com/MarketingPipeline/Media-Element.js">
+    <img title="Star on GitHub" src="https://img.shields.io/github/stars/MarketingPipeline/Media-Element.js.svg?style=social&label=Star">
   </a>
-  <a href="https://github.com/MarketingPipeline/Fork-Me.js/fork">
-    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/MarketingPipeline/Fork-Me.js.svg?style=social&label=Fork">
+  <a href="https://github.com/MarketingPipeline/Media-Element.js/fork">
+    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/MarketingPipeline/Media-Element.js.svg?style=social&label=Fork">
   </a>
    </p>  
 
@@ -65,9 +65,9 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
 
 
 
@@ -109,9 +109,9 @@ After getting your API key place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
 
 
 
@@ -150,9 +150,9 @@ Note: You do NOT need a API key to display songs.
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
 
 
 
@@ -214,7 +214,7 @@ Note: You do NOT need a API key to display songs.
 
 
 
-## Contributing ![GitHub](https://img.shields.io/github/contributors/MarketingPipeline/Fork-Me.js)
+## Contributing ![GitHub](https://img.shields.io/github/contributors/MarketingPipeline/Media-Element.js)
 
 Want to improve this project? Create a pull request with detailed changes / improvements! If approved you will be added to the list of contributors of this awesome project!
 
@@ -222,10 +222,10 @@ See also the list of
 [contributors](https://github.com/MarketingPipeline/Markdown-Tag/graphs/contributors) who
 participate in this project.
 
-## License ![GitHub](https://img.shields.io/github/license/MarketingPipeline/Fork-Me.js)
+## License ![GitHub](https://img.shields.io/github/license/MarketingPipeline/Media-Element.js)
 
 This project is licensed under the GPL-3.0 License - see the
-[LICENSE.md](https://github.com/MarketingPipeline/Fork-Me.js/blob/main/LICENSE) file for
+[LICENSE.md](https://github.com/MarketingPipeline/Media-Element.js/blob/main/LICENSE) file for
 details.
 
 
