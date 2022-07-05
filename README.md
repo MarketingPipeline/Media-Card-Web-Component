@@ -27,7 +27,7 @@ A custom web element to easily show off your favorite movies, TV shows & songs!
 
 ## Example and usage
 
-You can view a demo of Fork-Me.js in use [here.](https://marketingpipeline.github.io/Fork-Me.js)
+You can view a demo of Media-Element.js in use [here.](https://marketingpipeline.github.io/Media-Element.js)
 
 
 
@@ -65,9 +65,9 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/media-element.min.js"></script> 
 
 
 
@@ -109,9 +109,9 @@ After getting your API key place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/media-element.min.js"></script> 
 
 
 
@@ -150,9 +150,9 @@ Note: You do NOT need a API key to display songs.
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/fork-me.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/fork-me.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/media-element.min.js"></script> 
 
 
 
