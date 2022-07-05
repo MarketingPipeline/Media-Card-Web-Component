@@ -1,14 +1,13 @@
 # Fork-Me.js
 
-
-<p align="right">
+<div align="center"
 <a href="https://github.com/MarketingPipeline/Fork-Me.js" class="ui-container"
-      ><img
-        class="fork-me"      src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67"
-        alt="Fork me on GitHub"
-        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
-    /> </img></a> </p>
-    <p align="center">
+      ><img height="300px"
+       src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"
+    /> </img></a> 
+  </div>  
+    
+<p align="center">
   <b>Show off your favourite movies, tv shows & songs on your web page!</b>
 
   <br>
@@ -217,7 +216,7 @@ Note: You do NOT need a API key to display songs.
 
 ## Contributing ![GitHub](https://img.shields.io/github/contributors/MarketingPipeline/Fork-Me.js)
 
-Want to improve this? Create a pull request with detailed changes / improvements! If approved you will be added to the list of contributors of this awesome project!
+Want to improve this project? Create a pull request with detailed changes / improvements! If approved you will be added to the list of contributors of this awesome project!
 
 See also the list of
 [contributors](https://github.com/MarketingPipeline/Markdown-Tag/graphs/contributors) who
