@@ -27,7 +27,7 @@ A custom web element to easily show off your favorite movies, TV shows & songs!
 
 ## Example and usage
 
-You can view a demo of Media-Element.js in use [here.](https://marketingpipeline.github.io/Media-Element.js)
+You can view a demo of Media-Element.js in use [here.](https://marketingpipeline.github.io/Media-Element.js/demo)
 
 
 
