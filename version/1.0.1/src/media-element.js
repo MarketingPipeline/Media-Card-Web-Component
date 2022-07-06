@@ -335,7 +335,7 @@ class Media_Details extends HTMLElement {
 }
 .movie_card .info_section .movie_desc .text {
   color: #cfd6e1;
-    font-size: 0.69vw;
+   font-size: 0.86rem;
 }
 .movie_card .info_section .movie_social {
   height: 10%;
