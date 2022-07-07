@@ -1,6 +1,6 @@
 # Media-Element.js
 
-<div align="center"
+<div align="center">
 <a href="https://github.com/MarketingPipeline/Media-Element.js" class="ui-container"
       ><img height="300px"
        src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"
