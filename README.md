@@ -1,11 +1,9 @@
 # Media-Element.js
 
 <div align="center">
-<a href="https://github.com/MarketingPipeline/Media-Element.js" class="ui-container"
-      ><img height="300px"
-       src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"
-    /> </img></a> 
-  </div>  
+<a href="https://github.com/MarketingPipeline/Media-Element.js"><img height="300px"
+       src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"/> </img></a> 
+</div>  
     
 <p align="center">
   <b>Show off your favourite movies, tv shows & songs on your web page!</b>
