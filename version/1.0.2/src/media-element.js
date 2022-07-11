@@ -3,6 +3,7 @@ mainSheet.replaceSync(`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
   * {
     box-sizing: border-box;
+    margin: 0;
   }
   .media_card {
     font-family: 'Montserrat', helvetica, arial, sans-serif;
@@ -47,7 +48,7 @@ mainSheet.replaceSync(`
   }
   .media_card .info_section .media_header .minutes {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 10px;
     color: #555;
     padding: 5px;
     border-radius: 5px;
@@ -122,10 +123,10 @@ mainSheet.replaceSync(`
     background-position: center center;
   }
   @media screen and (min-width: 768px) {
-    .movie_header {
+    .media_header {
       width: 65%;
     }
-    .movie_desc {
+    .media_desc {
       width: 50%;
     }
     .info_section {
@@ -137,7 +138,7 @@ mainSheet.replaceSync(`
     }
   }
   @media screen and (max-width: 768px) {
-    .movie_card {
+    .media_card {
       width: 95%;
       margin: 70px auto;
       min-height: 240px;
@@ -147,11 +148,11 @@ mainSheet.replaceSync(`
       width: 100%;
       background-position: 50% 50% !important;
     }
-    .movie_header {
+    .media_header {
       width: 100%;
       margin-top: 85px;
     }
-    .movie_desc {
+    .media_desc {
       width: 100%;
     }
     .info_section {
