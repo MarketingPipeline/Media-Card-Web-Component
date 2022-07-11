@@ -221,7 +221,14 @@ class Media_Details extends HTMLElement {
       sheets.push(darkTheme)
     }
     this.shadow.adoptedStyleSheets = sheets;
-
+    
+    // Song Option
+       if (this.type === "song"){
+    
+     this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
+  //  console.log(EndPoint)
+    }
+    
     this.shadow.innerHTML = `
       <div class="media_card">
         <div class="info_section">
@@ -267,20 +274,64 @@ class Media_Details extends HTMLElement {
       if(this.year){
         this.endPoint += `&first_air_date_year=${this.year}`
       }
+      
+      
+     
     }
     this.getDetails()
   }
 
   populateCardExtras(data) {
+    
     this.extraData = data // 🤞
+    
     this.minutes.innerText = `${this.extraData.runtime} mins`
     const genres = this.extraData.genres.map(genre => genre.name).join(', ')
-    console.log(genres)
+    //console.log(genres)
     this.showMinutes.innerText = genres
   }
 
   populateCard(data) {
+    
     this.data = data.results[0] // 🤞
+    
+        if(this.type === 'song'){
+      
+
+       
+     var  CardBackgroundStyling = ` 
+    background-position: center center; 
+    `
+    // results[0].artworkUrl100}"/>
+    //  <h1>${
+    //        results[0].trackName}</h1></h1>
+    //  <h4>${
+    //        results[0].artistName}</h4>
+    
+    //  <p class="">${results[0].collectionName}</p>
+   // </div>
+   
+  
+ // </div>
+ // <div class="blur_back" //style="background:url(${results[0].artworkUrl100}); 
+///  
+  
+		var Movie = this.data.trackName
+    var Description = this.data.collectionName
+    //	var id = results[0].id
+    //  console.log(id)
+     var PosterPath = this.data.artworkUrl100
+     var BackdropPath = this.data.artworkUrl100
+     
+  var Released_In_Year = this.data.releaseDate.split('-')[0]
+     
+     
+     
+          
+          
+          // CONSOLE LOG FOR TESTING
+           console.log("Song Details: " + Movie,Description,Released_In_Year)
+    }
     if(this.type === 'film'){
       fetch(`https://api.themoviedb.org/3/movie/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
           .then(res => res.json())
@@ -288,7 +339,10 @@ class Media_Details extends HTMLElement {
     }else{
       this.minutes.remove()
     }
-    console.log(this.data)
+    
+
+    
+   // console.log(this.data)
     this.blurBack.style.background = `url("https://image.tmdb.org/t/p/w500${this.data.backdrop_path}")`
     this.blurBack.style.backgroundSize = 'cover'
     this.h1.innerText = (this.type === 'film')
