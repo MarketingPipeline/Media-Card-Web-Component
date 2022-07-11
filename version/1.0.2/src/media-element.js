@@ -289,7 +289,7 @@ class Media_Details extends HTMLElement {
       this.minutes.remove()
     }
     console.log(this.data)
-    this.blurBack.style.background = `url(https://image.tmdb.org/t/p/w500/${this.data.backdrop_path})`
+    this.blurBack.style.background = `url("https://image.tmdb.org/t/p/w500${this.data.backdrop_path}")`
     this.blurBack.style.backgroundSize = 'cover'
     this.h1.innerText = (this.type === 'film')
         ? this.data.original_title
@@ -298,7 +298,7 @@ class Media_Details extends HTMLElement {
         ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
         : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
     this.text.innerText = this.data.overview
-    this.locandina.src = `https://image.tmdb.org/t/p/w500/${this.data.poster_path}`
+    this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
   }
 
   getDetails() {
