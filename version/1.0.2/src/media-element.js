@@ -1,6 +1,11 @@
 const mainSheet = new CSSStyleSheet()
 mainSheet.replaceSync(`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
+  :host { 
+    --background: linear-gradient(270deg, #cfcfcf, #8b8b8b);
+    --background-size: 200% 100%;
+    --animation: 1.5s shine linear infinite;
+  }
   * {
     box-sizing: border-box;
     margin: 0;
@@ -43,13 +48,13 @@ mainSheet.replaceSync(`
     font-weight: 400;
   }
   .media_card .info_section .media_header h4 {
-    color: #555;
+    color: #555555;
     font-weight: 400;
   }
   .media_card .info_section .media_header .minutes {
     display: inline-block;
     margin-top: 10px;
-    color: #555;
+    color: #555555;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -57,7 +62,7 @@ mainSheet.replaceSync(`
   .media_card .info_section .media_header .empty-span {
     display: inline-block;
     margin-top: 15px;
-    color: #555;
+    color: #555555;
     padding: 5px;
     margin-left:-14px;
   }
@@ -160,24 +165,63 @@ mainSheet.replaceSync(`
       display: inline-grid;
     }
   }
+  .skeleton {
+    position: relative;
+  }
+  .skeleton .locandina {
+    margin-right: 20px;
+    background: var(--background);
+    background-size: var(--background-size);
+    animation: var(--animation);
+    width: 80px;
+  }
+  .skeleton h1 {
+    position: absolute;
+    left: 125px;
+    height: 32px;
+    width: 200px;
+    background: var(--background);
+    background-size: var(--background-size);
+    animation: var(--animation);
+  }
+  .skeleton h4 {
+    position: absolute;
+    left: 125px;
+    top: 60px;
+    width: 60px;
+    height: 16px;
+    background: var(--background);
+    background-size: var(--background-size);
+    animation: var(--animation);
+  }
+  .skeleton .text {
+    position: absolute;
+    left: auto;
+    top: auto;
+    width: 350px;
+    height: 80px;
+    background: var(--background);
+    background-size: var(--background-size);
+    animation: var(--animation);
+  }
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
 `)
 const darkTheme = new CSSStyleSheet()
 darkTheme.replaceSync(`
+  // You could add a different set of colours here for the skeleton elements
+  :host { 
+    --background: linear-gradient(270deg, #cfcfcf, #8b8b8b);
+    --media-header: #cee4fd;
+    --media-header-h4: #9ac7fa;
+    --media-header-minutes: #ffffff;
+    --media-header-minutes-border: 1px solid rgba(255, 255, 255, 0.13);
+  }
   .media_card .info_section .media_header h1 {
     color: white;
-  }
-  .media_card .info_section .media_header h4 {
-    color: #9ac7fa;
-  }
-  .media_card .info_section .media_header .minutes {
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.13);
-  }
-  .media_card .info_section .media_header .show-minutes {
-    color: #cee4fd;
-  }
-  .media_card .info_section .media_header .no-minutes {
-    color: #cee4fd;
   }
   .media_card .info_section .media_desc .text {
     color: #cfd6e1;
@@ -188,6 +232,13 @@ darkTheme.replaceSync(`
   .media_card .info_section .media_social ul li:hover {
     color: rgba(255, 255, 255, 0.8);
   }
+  .media_card .info_section .media_header .show-minutes {
+    color: #cee4fd;
+  }
+  .media_card .info_section .media_header .no-minutes {
+    color: #cee4fd;
+  }
+
   .media_card .info_section .media_social ul li i {
     font-size: 19px;
     cursor: pointer;
@@ -230,13 +281,13 @@ class Media_Details extends HTMLElement {
     }
     
     this.shadow.innerHTML = `
-      <div class="media_card">
+      <div class="media_card skeleton">
         <div class="info_section">
           <div class="media_header">
             <img class="locandina"
                  src=""/>
-            <h1>The Matrix</h1>
-            <h4>1999</h4>
+            <h1></h1>
+            <h4></h4>
             <span class="minutes"></span>
             <p class="show-minutes"></p>
           </div>
@@ -247,6 +298,7 @@ class Media_Details extends HTMLElement {
         <div class="blur_back"></div>
       </div>
     `
+    this.card = this.shadow.querySelector('.media_card')
     this.locandina = this.shadow.querySelector('.locandina')
     this.h1 = this.shadow.querySelector('h1')
     this.h4 = this.shadow.querySelector('h4')
@@ -289,10 +341,17 @@ class Media_Details extends HTMLElement {
     const genres = this.extraData.genres.map(genre => genre.name).join(', ')
     //console.log(genres)
     this.showMinutes.innerText = genres
+
+    let elem = this.h1;
+    let rect = elem.getBoundingClientRect();
+    console.log(elem, rect)
+
+
+
   }
 
   populateCard(data) {
-    
+    this.card.classList.remove('skeleton')
     this.data = data.results[0] // 🤞
     
         if(this.type === 'song'){
@@ -339,11 +398,7 @@ class Media_Details extends HTMLElement {
     }else{
       this.minutes.remove()
     }
-    
-
-    
-   // console.log(this.data)
-    this.blurBack.style.background = `url("https://image.tmdb.org/t/p/w500${this.data.backdrop_path}")`
+    this.blurBack.style.background = `url(https://image.tmdb.org/t/p/w500/${this.data.backdrop_path})`
     this.blurBack.style.backgroundSize = 'cover'
     this.h1.innerText = (this.type === 'film')
         ? this.data.original_title
