@@ -307,7 +307,8 @@ class Media_Details extends HTMLElement {
    
     
     
-          const genres = this.extraData.genres.map(genre => genre.name).join(', ')
+           const genres = this.extraData.genres.map(genre => genre.name).slice(0, 3).join(', ')
+    this.showMinutes.innerText = genres
  
     //console.log(genres)
     
