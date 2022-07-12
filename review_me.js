@@ -247,6 +247,7 @@ class Media_Details extends HTMLElement {
         <div class="blur_back"></div>
       </div>
     `
+     this.card = this.shadow.querySelector('.media_card')
     this.locandina = this.shadow.querySelector('.locandina')
     this.h1 = this.shadow.querySelector('h1')
     this.h4 = this.shadow.querySelector('h4')
@@ -286,8 +287,13 @@ class Media_Details extends HTMLElement {
     this.extraData = data // 🤞
     
     this.minutes.innerText = `${this.extraData.runtime} mins`
-    const genres = this.extraData.genres.map(genre => genre.name).join(', ')
+   
+    
+    
+          const genres = this.extraData.genres.map(genre => genre.name).join(', ')
+ 
     //console.log(genres)
+    
     this.showMinutes.innerText = genres
   }
 
@@ -311,12 +317,22 @@ class Media_Details extends HTMLElement {
     this.blurBack.style.backgroundSize = 'cover'
     this.h1.innerText = (this.type === 'song')
         ? this.data.trackName
-        : this.data.original_name
+        : this.data
       
-      this.h4.innerText = this.data.releaseDate.split('-')[0]
-    this.text.innerText = this.data.collectionName
+      this.h4.innerText = this.data.artistName
+        
+        //this.data.releaseDate.split('-')[0]
     this.locandina.src = this.data.artworkUrl100    
     this.blurBack.style.background =  `url("${this.data.artworkUrl100}")`
+    this.showMinutes.innerText = this.data.collectionName
+    this.showMinutes.innerText += this.data.primaryGenreName
+    this.card.style.height='170px'
+      
+      /// Need to add mobile sizing `240px`
+      
+      // need to add proper classes too
+      
+      
     }else{
       // console.log(this.data)
     this.blurBack.style.background = `url("https://image.tmdb.org/t/p/w500${this.data.backdrop_path}")`
