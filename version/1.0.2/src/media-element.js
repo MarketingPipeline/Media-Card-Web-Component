@@ -122,6 +122,7 @@ mainSheet.replaceSync(`
     background-repeat: no-repeat;
     background-position: center center;
   }
+  
   @media screen and (min-width: 768px) {
     .media_header {
       width: 65%;
@@ -138,6 +139,10 @@ mainSheet.replaceSync(`
     }
   }
   @media screen and (max-width: 768px) {
+   
+   .media_card .blur_back{
+  left:0%;
+  }
     .media_card {
       width: 95%;
       margin: 70px auto;
@@ -191,6 +196,12 @@ darkTheme.replaceSync(`
   .media_card .info_section .media_social ul li i {
     font-size: 19px;
     cursor: pointer;
+  }
+  .collection-name{
+  color:white;
+  }
+  .primary-genre-name{
+  color:white;
   }
   @media screen and (min-width: 768px) {
     .info_section {
