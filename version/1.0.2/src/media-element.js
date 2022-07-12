@@ -1,4 +1,4 @@
-const mainSheet = new CSSStyleSheet()
+const mainSheet = new CSSStyleSheet();
 mainSheet.replaceSync(`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
   :host { 
@@ -30,7 +30,7 @@ mainSheet.replaceSync(`
       height: 303px;
     }
   }
-  .media_card .info_section {
+  .info_section {
     position: relative;
     width: 100%;
     height: 100%;
@@ -38,20 +38,20 @@ mainSheet.replaceSync(`
     z-index: 2;
     border-radius: 10px;
   }
-  .media_card .info_section .media_header {
+  .media_header {
     position: relative;
     padding: 25px;
     height: 40%;
   }
-  .media_card .info_section .media_header h1 {
+  h1 {
     color: black;
     font-weight: 400;
   }
-  .media_card .info_section .media_header h4 {
+  h4 {
     color: #555555;
     font-weight: 400;
   }
-  .media_card .info_section .media_header .minutes {
+  .minutes {
     display: inline-block;
     margin-top: 10px;
     color: #555555;
@@ -59,64 +59,64 @@ mainSheet.replaceSync(`
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.05);
   }
-  .media_card .info_section .media_header .empty-span {
+  .empty-span {
     display: inline-block;
     margin-top: 15px;
     color: #555555;
     padding: 5px;
     margin-left:-14px;
   }
-  .media_card .info_section .media_header .empty-space {
+  .empty-space {
     display: inline-block;
     margin-top: 15px;
     padding: 5px;
   }
-  .media_card .info_section .media_header .show-minutes {
+  .show-minutes {
     display: inline-block;
     color: #959595;
     margin-left: 10px;
   }
-  .media_card .info_section .media_header .no-minutes {
+  .no-minutes {
     display: inline-block;
     color: #959595;
   }
-  .media_card .info_section .media_header .locandina {
+  .locandina {
     position: relative;
     float: left;
     margin-right: 20px;
     height: 120px;
     box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
   }
-  .media_card .info_section .media_desc {
+  .media_desc {
     padding: 25px;
     height: 50%;
   }
-  .media_card .info_section .media_desc .text {
+  .text {
     color: #545454;
     display: block;
     font-size: 0.86rem;
   }
-  .media_card .info_section .media_social {
+  .media_social {
     height: 10%;
     padding-left: 15px;
     padding-bottom: 20px;
   }
-  .media_card .info_section .media_social ul {
+  .media_social ul {
     list-style: none;
     padding: 0;
   }
-  .media_card .info_section .media_social ul li {
+  .media_social ul li {
     display: inline-block;
     color: rgba(0, 0, 0, 0.3);
     transition: color 0.3s;
     transition-delay: 0.15s;
     margin: 0 10px;
   }
-  .media_card .info_section .media_social ul li:hover {
+  .media_social ul li:hover {
     transition: color 0.3s;
     color: rgba(0, 0, 0, 0.7);
   }
-  .media_card .blur_back {
+  .blur_back {
     position: absolute;
     top: 0;
     z-index: 1;
@@ -153,6 +153,7 @@ mainSheet.replaceSync(`
     .blur_back {
       width: 100%;
       background-position: 50% 50% !important;
+      left: unset;
     }
     .media_header {
       width: 100%;
@@ -164,6 +165,7 @@ mainSheet.replaceSync(`
     .info_section {
       background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
       display: inline-grid;
+      height: unset;
     }
   }
   .skeleton {
@@ -210,35 +212,35 @@ mainSheet.replaceSync(`
       background-position-x: -200%;
     }
   }
-`)
-const darkTheme = new CSSStyleSheet()
+`);
+const darkTheme = new CSSStyleSheet();
 darkTheme.replaceSync(`
-  .media_card .info_section .media_header h1 {
+  h1 {
     color: white;
   }
-  .media_card .info_section .media_header h4 {
+  h4 {
     color: #9ac7fa;
   }
-  .media_card .info_section .media_header .minutes {
+  .minutes {
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.13);
   }
-  .media_card .info_section .media_header .show-minutes {
+  .show-minutes {
     color: #cee4fd;
   }
-  .media_card .info_section .media_header .no-minutes {
+  .no-minutes {
     color: #cee4fd;
   }
-  .media_card .info_section .media_desc .text {
+  .text {
     color: #cfd6e1;
   }
-  .media_card .info_section .media_social ul li {
+  .media_social ul li {
     color: rgba(255, 255, 255, 0.4);
   }
-  .media_card .info_section .media_social ul li:hover {
+  .media_social ul li:hover {
     color: rgba(255, 255, 255, 0.8);
   }
-  .media_card .info_section .media_social ul li i {
+  .media_social ul li i {
     font-size: 19px;
     cursor: pointer;
   }
@@ -252,7 +254,7 @@ darkTheme.replaceSync(`
       background: linear-gradient(to top, #141413 50%, transparent 100%);
     }
   }
-`)
+`);
 class Media_Details extends HTMLElement {
   static get observedAttributes() {
     return [
