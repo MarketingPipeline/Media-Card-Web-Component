@@ -244,6 +244,13 @@ darkTheme.replaceSync(`
     font-size: 19px;
     cursor: pointer;
   }
+  .collection-name {
+    color: white;
+  }
+  .primary-genre-name {
+    color: white;
+    font-weight: bold;
+  }
   @media screen and (min-width: 768px) {
     .info_section {
       background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
@@ -255,6 +262,20 @@ darkTheme.replaceSync(`
     }
   }
 `);
+const songTheme = new CSSStyleSheet();
+songTheme.replaceSync(`
+  .media_card {
+    height: 170px;
+  }
+  .media_desc {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .media_card {
+      height: 240px;
+    }
+  }
+`)
 class Media_Details extends HTMLElement {
   static get observedAttributes() {
     return [
@@ -272,15 +293,10 @@ class Media_Details extends HTMLElement {
     if(this.theme !== 'light') {
       sheets.push(darkTheme)
     }
-    this.shadow.adoptedStyleSheets = sheets;
-    
-    // Song Option
-       if (this.type === "song"){
-    
-     this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
-  //  console.log(EndPoint)
+    if(this.type === 'song') {
+      sheets.push(songTheme)
     }
-    
+    this.shadow.adoptedStyleSheets = sheets;
     this.shadow.innerHTML = `
       <div class="media_card skeleton">
         <div class="info_section">
@@ -323,73 +339,30 @@ class Media_Details extends HTMLElement {
         this.endPoint += `&year=${this.year}`
       }
     }
-    if(this.type.toLowerCase() === 'tv'){
+    if(this.type === 'tv'){
       this.endPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
       if(this.year){
         this.endPoint += `&first_air_date_year=${this.year}`
       }
     }
+    if(this.type === 'song'){
+      // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
+      this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song`
+    }
+
     this.getDetails()
   }
 
   populateCardExtras(data) {
-    
     this.extraData = data // 🤞
-    
     this.minutes.innerText = `${this.extraData.runtime} mins`
-    const genres = this.extraData.genres.map(genre => genre.name).join(', ')
-    //console.log(genres)
+    const genres = this.extraData.genres.map(genre => genre.name).slice(0, 3).join(', ')
     this.showMinutes.innerText = genres
-
-    let elem = this.h1;
-    let rect = elem.getBoundingClientRect();
-    console.log(elem, rect)
-
-
-
   }
 
   populateCard(data) {
     this.card.classList.remove('skeleton')
     this.data = data.results[0] // 🤞
-    
-        if(this.type === 'song'){
-      
-
-       
-     var  CardBackgroundStyling = ` 
-    background-position: center center; 
-    `
-    // results[0].artworkUrl100}"/>
-    //  <h1>${
-    //        results[0].trackName}</h1></h1>
-    //  <h4>${
-    //        results[0].artistName}</h4>
-    
-    //  <p class="">${results[0].collectionName}</p>
-   // </div>
-   
-  
- // </div>
- // <div class="blur_back" //style="background:url(${results[0].artworkUrl100}); 
-///  
-  
-		var Movie = this.data.trackName
-    var Description = this.data.collectionName
-    //	var id = results[0].id
-    //  console.log(id)
-     var PosterPath = this.data.artworkUrl100
-     var BackdropPath = this.data.artworkUrl100
-     
-  var Released_In_Year = this.data.releaseDate.split('-')[0]
-     
-     
-     
-          
-          
-          // CONSOLE LOG FOR TESTING
-           console.log("Song Details: " + Movie,Description,Released_In_Year)
-    }
     if(this.type === 'film'){
       fetch(`https://api.themoviedb.org/3/movie/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
           .then(res => res.json())
@@ -397,16 +370,39 @@ class Media_Details extends HTMLElement {
     }else{
       this.minutes.remove()
     }
-    this.blurBack.style.background = `url(https://image.tmdb.org/t/p/w500/${this.data.backdrop_path})`
-    this.blurBack.style.backgroundSize = 'cover'
-    this.h1.innerText = (this.type === 'film')
+    if(this.type !== 'song'){
+      this.blurBack.style.background =`url(https://image.tmdb.org/t/p/w500/${this.data.backdrop_path})`
+      this.blurBack.style.backgroundSize = 'cover'
+    } else {
+      this.blurBack.style.background = 'unset'
+      this.blurBack.style.background = `url(${this.data.artworkUrl100})`
+    }
+    this.h1.innerText = this.type === 'film'
         ? this.data.original_title
-        : this.data.original_name
-    this.h4.innerText = (this.type === 'film')
+        : this.type === 'tv'
+            ? this.data.original_name
+            : this.data.trackName
+    this.h4.innerText = this.type === 'film'
         ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
-        : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
-    this.text.innerText = this.data.overview
-    this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        : this.type === 'film'
+            ? this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
+            : this.data.artistName
+    if(this.type !== 'song') {
+      this.text.innerText = this.data.overview
+    } else {
+      const collectionName = document.createElement('p')
+      collectionName.classList.add('collection-name')
+      collectionName.innerHTML = this.data.collectionName
+      this.h4.parentNode.appendChild(collectionName)
+      const primaryGenreName = document.createElement('p')
+      primaryGenreName.classList.add('primary-genre-name')
+      primaryGenreName.innerHTML = this.data.primaryGenreName
+      this.h4.parentNode.appendChild(primaryGenreName)
+
+    }
+    this.locandina.src = this.type !== 'song'
+        ? `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        : this.data.artworkUrl100
   }
   async populateError(error) {
     this.card.classList.remove('skeleton')
@@ -418,7 +414,7 @@ class Media_Details extends HTMLElement {
 
   async getDetails() {
     const response = await fetch(this.endPoint, {
-      mode: this.type === 'song' ? 'no-cors' : 'cors'
+      mode: 'cors'
     })
     if (response.ok) {
       const jsonResponse = await response.json();
@@ -427,19 +423,6 @@ class Media_Details extends HTMLElement {
       const jsonError = await response.json();
       this.populateError(jsonError)
     }
-    // const jsonResponse = await response.json();
-    //
-    //
-    //   fetch(, )
-    //       .then(response => {
-    //         if(!response.ok){
-    //           response.json(error)
-    //               .then(this.populateError(error))
-    //         }else{
-    //           response.json()
-    //         }
-    //       })
-    //       .then(json => this.populateCard(json))
   }
 
   get name() {
@@ -449,7 +432,7 @@ class Media_Details extends HTMLElement {
     return this.getAttribute('theme') || 'light'
   }
   get type() {
-    return this.getAttribute('type') || 'film'
+    return this.getAttribute('type') ? this.getAttribute('type').toLowerCase() : 'film'
   }
 }
 
