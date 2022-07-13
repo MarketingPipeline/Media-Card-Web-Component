@@ -120,6 +120,10 @@ mainSheet.replaceSync(`
     }
   }
   @media screen and (max-width: 768px) {
+   
+   .media_card .blur_back{
+  left:0%;
+  }
     .media_card {
       width: 95%;
       margin: 70px auto;
