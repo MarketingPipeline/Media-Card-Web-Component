@@ -27,7 +27,7 @@ mainSheet.replaceSync(`
   }
   @media (pointer:none), (pointer:coarse) {
     .media_card {
-      height: 303px;
+      min-height: 303px;
     }
   }
   .info_section {
@@ -109,7 +109,7 @@ mainSheet.replaceSync(`
   }
   @media screen and (min-width: 768px) {
     .media_card {
-      height: 350px;
+      min-height: 350px;
     }
     .info_section {
       height: 100%;
@@ -136,8 +136,7 @@ mainSheet.replaceSync(`
     .media_card {
       width: 95%;
       margin: 70px auto;
-      height: 240px;
-      height: auto;
+      min-height: 240px;
     }
     .blur_back {
       width: 100%;
@@ -237,12 +236,12 @@ songTheme.replaceSync(`
   }
   @media screen and (min-width: 768px) {
     .media_card {
-      height: 170px;
+      min-height: 170px;
     }
   }
   @media screen and (max-width: 768px) {
     .media_card {
-      height: 240px;
+      min-height: 240px;
     }
   }
   .blur_back {
