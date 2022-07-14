@@ -310,19 +310,23 @@ class Media_Details extends HTMLElement {
     if(this.type === 'tv'){
       this.endPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
       if(this.year){
-        this.endPoint += `&year=${this.year}`
+        this.endPoint += `&first_air_date_year=${this.year}`
       }
     }
     if(this.type === 'song'){
-      // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
-      this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
+      this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
+      // this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
     this.getDetails()
   }
 
   populateCardExtras(data) {
     this.extraData = data // 🤞
-    this.minutes.innerText = `${this.extraData.runtime} mins`
+    if(this.type === 'film') {
+      this.minutes.innerText = `${this.extraData.runtime} mins`
+    } else {
+      this.minutes.remove()
+    }
     const genres = this.extraData.genres.map(genre => genre.name).join(', ')
     this.showMinutes.innerText = genres
   }
@@ -350,7 +354,7 @@ class Media_Details extends HTMLElement {
       this.locandinaHolding.style.display = 'block'
     } else {
       this.data = data.results[0] // 🤞
-      if (this.type === 'film') {
+      if (this.type !== 'song') {
         fetch(`https://api.themoviedb.org/3/movie/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
             .then(res => res.json())
             .then(data => this.populateCardExtras(data))
@@ -382,16 +386,23 @@ class Media_Details extends HTMLElement {
   }
 
   async getDetails() {
-    const response = await fetch(this.endPoint, {
-      mode: 'cors'
-    })
-    if (response.ok) {
-      const jsonResponse = await response.json();
-      this.populateCard(jsonResponse)
-    } else {
-      const jsonError = await response.json();
-      this.populateError(jsonError)
+    try {
+      const response = await fetch(this.endPoint, {
+        mode: 'cors'
+      })
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        this.populateCard(jsonResponse)
+      } else {
+        const jsonError = await response.json();
+        this.populateError(jsonError)
+      }
+    } catch(error) {
+      this.populateError({
+        status_message: 'There was in issue with fetching the media details'
+      })
     }
+
   }
 
   get name() {
