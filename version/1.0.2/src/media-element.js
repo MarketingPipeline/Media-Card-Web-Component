@@ -343,7 +343,6 @@ class Media_Details extends HTMLElement {
 
   populateCardExtras(data) {
     this.extraData = data // 🤞
-    console.log(this.extraData)
     if(this.type === 'film' && this.extraData.runtime) {
       this.minutes.innerText = `${this.extraData.runtime} mins`
     } else {
