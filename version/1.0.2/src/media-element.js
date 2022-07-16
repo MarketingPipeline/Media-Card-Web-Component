@@ -22,7 +22,6 @@ mainSheet.replaceSync(`
     transition: all 0.4s;
     box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
     text-align: left;  
-    width: 65%;
     height: fit-content;
     max-width: 800px;
   }
@@ -67,6 +66,10 @@ mainSheet.replaceSync(`
   .show-minutes {
     display: inline-block;
     color: #959595;
+    margin-top: .5rem;
+  }
+  .minutes ~ .show-minutes {
+    margin-top: unset;
   }
   .locandina {
     position: relative;
@@ -112,6 +115,12 @@ mainSheet.replaceSync(`
     .media_card {
       min-height: 350px;
     }
+    h1 {
+      width: 200%;
+    }
+    .media_header {
+      max-width: 50%;
+    }
     .info_section {
       height: 100%;
       position: absolute;
@@ -126,6 +135,7 @@ mainSheet.replaceSync(`
       width: 100%;
       background-size: cover;
       background-position: center center;
+      width: 80%;
       left: 33%;
     }
   }
@@ -245,9 +255,6 @@ songTheme.replaceSync(`
       min-height: 240px;
     }
   }
-  .blur_back {
-    background: unset
-  }
 `)
 class Media_Details extends HTMLElement {
   static get observedAttributes() {
@@ -302,9 +309,14 @@ class Media_Details extends HTMLElement {
     this.showMinutes = this.shadow.querySelector('.show-minutes')
     this.text = this.shadow.querySelector('.text')
     this.blurBack = this.shadow.querySelector('.blur_back')
-
     this.collectionName = this.shadow.querySelector('.collection-name')
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
+    if(typeof TheMovieDB_APIKey === 'undefined' && this.type !== 'song'){
+      this.populateError({
+        status_message: 'Please provide an API Key'
+      })
+      return;
+    }
 
     const yearCheck = /\s\([0-9]{4}\)$/ // Checks to see if there is a year, in brackets, at the end of the name
     if(/\s\([0-9]{4}\)$/.test(this.name)){
@@ -315,18 +327,13 @@ class Media_Details extends HTMLElement {
       this.mediaName = this.name
     }
 
-    if(this.type === 'film'){
-      this.endPoint = `https://api.themoviedb.org/3/search/movie?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
+    if(this.type === 'film' || this.type === 'tv'){
+      this.endPoint = `https://api.themoviedb.org/3/search/${this.type === 'film' ? 'movie' : 'tv'}?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
       if(this.year){
-        this.endPoint += `&year=${this.year}`
+        this.endPoint += `&${this.type === 'film' ? 'year' : 'first_air_date_year'}=${this.year}`
       }
     }
-    if(this.type === 'tv'){
-      this.endPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
-      if(this.year){
-        this.endPoint += `&first_air_date_year=${this.year}`
-      }
-    }
+
     if(this.type === 'song'){
       // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
@@ -336,7 +343,8 @@ class Media_Details extends HTMLElement {
 
   populateCardExtras(data) {
     this.extraData = data // 🤞
-    if(this.type === 'film') {
+    console.log(this.extraData)
+    if(this.type === 'film' && this.extraData.runtime) {
       this.minutes.innerText = `${this.extraData.runtime} mins`
     } else {
       this.minutes.remove()
@@ -358,9 +366,17 @@ class Media_Details extends HTMLElement {
     }
   }
 
+  emptyResults(data) {
+    return (typeof data.total_results !== 'undefined' && data.total_results === 0)
+        ? true
+        : (typeof data.resultCount !== 'undefined' && data.resultCount === 0)
+            ? true
+            : false
+  }
+
   populateCard(data) {
     this.card.classList.remove('skeleton')
-    if(data.resultCount === 0){
+    if(this.emptyResults(data)){
       this.h1.innerText = 'Error'
       this.h4.innerText = `Unable to find media`
       this.minutes.remove()
@@ -370,7 +386,7 @@ class Media_Details extends HTMLElement {
     } else {
       this.data = data.results[0] // 🤞
       if (this.type !== 'song') {
-        fetch(`https://api.themoviedb.org/3/movie/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
+        fetch(`https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
             .then(res => res.json())
             .then(data => this.populateCardExtras(data))
       } else {
@@ -417,7 +433,6 @@ class Media_Details extends HTMLElement {
         status_message: 'There was in issue with fetching the media details'
       })
     }
-
   }
 
   get name() {
