@@ -24,6 +24,7 @@ mainSheet.replaceSync(`
     text-align: left;  
     width: 65%;
     height: fit-content;
+    max-width: 800px;
   }
   @media (pointer:none), (pointer:coarse) {
     .media_card {
@@ -124,7 +125,7 @@ mainSheet.replaceSync(`
     .blur_back {
       width: 100%;
       background-size: cover;
-      background-position: right center;
+      background-position: center center;
       left: 33%;
     }
   }
