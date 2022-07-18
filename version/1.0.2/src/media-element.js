@@ -374,6 +374,7 @@ class Media_Details extends HTMLElement {
   }
 
   populateCard(data) {
+    //console.log(data)
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
       this.h1.innerText = 'Error'
@@ -402,7 +403,14 @@ class Media_Details extends HTMLElement {
         this.collectionName.innerHTML = this.data.collectionName
         this.primaryGenreName.innerHTML = this.data.primaryGenreName
       } else {
-        this.blurBack.style.backgroundImage = `url( 'https://image.tmdb.org/t/p/w500${this.data.backdrop_path}' )`
+
+         if (data.backdrop_path == undefined){
+           
+        var Background = `https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg`
+        } else{
+          var Background = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        }
+        this.blurBack.style.backgroundImage = `url( '${Background}' )`
         this.h1.innerText = (this.type === 'film')
             ? this.data.original_title
             : this.data.original_name
@@ -410,7 +418,13 @@ class Media_Details extends HTMLElement {
             ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
             : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
         this.text.innerText = this.data.overview
-        this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        if (this.data.poster_path == null){
+        this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
+        } else{
+          this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        }
+        
+       // console.log(this.locandina.src)
       }
     }
   }
