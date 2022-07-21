@@ -89,7 +89,7 @@ After getting your API key (if required) place it in your HTML document like so
 	 
    
 ```html
- <media-element name="The Mask (1994)" type="TV"></media-element>
+ <media-element name="The Twilight Zone (1959)" type="TV"></media-element>
 ```
 
 Note: To display TV show(s) - you will require a API key from TheMovieDB.
@@ -147,9 +147,9 @@ Note: You do NOT need a API key to display songs.
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.1/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.1/dist/media-element.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.2/dist/media-element.min.js"></script> 
 
 
 
