@@ -404,7 +404,7 @@ class Media_Details extends HTMLElement {
         this.primaryGenreName.innerHTML = this.data.primaryGenreName
       } else {
 
-         var Background = `https://image.tmdb.org/t/p/w500${this.backdrop_path}`
+         var Background = `https://image.tmdb.org/t/p/w500${this.data.backdrop_path}`
          if (this.data.backdrop_path == undefined || this.data.backdrop_path == null){
            
         Background = `https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg`
