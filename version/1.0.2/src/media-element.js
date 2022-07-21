@@ -404,12 +404,11 @@ class Media_Details extends HTMLElement {
         this.primaryGenreName.innerHTML = this.data.primaryGenreName
       } else {
 
-         if (data.backdrop_path == undefined){
+         var Background = `https://image.tmdb.org/t/p/w500${this.backdrop_path}`
+         if (this.data.backdrop_path == undefined || this.data.backdrop_path == null){
            
-        var Background = `https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg`
-        } else{
-          var Background = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
-        }
+        Background = `https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg`
+        } 
         this.blurBack.style.backgroundImage = `url( '${Background}' )`
         this.h1.innerText = (this.type === 'film')
             ? this.data.original_title
