@@ -105,7 +105,7 @@ mainSheet.replaceSync(`
     width: 100%;
     height: 40px;
     border-bottom: 8px solid #fff;
-    background: linear-gradient(to top, white, rgba(255, 255, 255, 0.2));
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
 }
 
 
@@ -155,7 +155,7 @@ mainSheet.replaceSync(`
   @media screen and (max-width: 768px) {
       .text:after {
     
-    right: 0%;
+    right: 50%;
  
 }
     
@@ -262,13 +262,7 @@ darkTheme.replaceSync(`
   @media screen and (max-width: 768px) {
   
      .text:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0%;
-    width: 100%;
-    height: 40px;
-    border-bottom: 8px solid black;
+   
     background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
 }
     .info_section {
