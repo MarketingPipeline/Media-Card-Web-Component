@@ -65,7 +65,7 @@
 </div></button>
 	<div class="hero__terminal" id="previews" style="animation-delay: 0.5s;  max-height: 600px; overflow-y: hidden;">
     
-   <media-element name="8 Mile" theme="dark"></media-element>
+   
 	<!--- <github-repo name="MarketingPip" ></github-repo>
 <button onclick="test()">t</button>
  -->
@@ -282,49 +282,50 @@ Note: You do NOT need a API key to display songs.
 --->
 	<script src="./scripts/global.js"></script>
   <script type="text/javascript">
+	     var Terminal = document.getElementById('previews')
+	  
+window.onload = function AddOnLoad{
+		         Terminal.innerHTML = `<media-element name="8 Mile" theme="dark"></media-element>`}
+	  }
+	  
     function test(){
       
       var e = document.getElementById("select");
 var strUser = e.value;
       
-      var Terminal = document.getElementById('previews')
-      if (strUser == 'profile'){
-       Terminal.innerHTML = `<github-profile-card name="MarketingPip" ></github-profile-card>`;}
+ 
       
         if (strUser == 'tv_show'){
        Terminal.innerHTML = `      <media-element name="The Simpsons"
-                     type="TV"></media-element>`;}
+                     type="TV"></media-element>`}
       
        if (strUser == 'movie'){
        Terminal.innerHTML = `<media-element name="Real Genius"
-                     ></media-element>`};
+                     ></media-element>`}
          
          
           if (strUser == 'song'){
        Terminal.innerHTML = `<media-element name="The Beatles In My Life" type="song"
-                    ></media-element>`;
-       
-       }
+                    ></media-element>`}
       
       
          
           if (strUser == 'song_dark'){
        Terminal.innerHTML = `<media-element name="The Beatles In My Life" type="song"
-                     theme="dark"></media-element>`;
+                     theme="dark"></media-element>`
        
        }
       
          
           if (strUser == 'movie_dark'){
        Terminal.innerHTML = `<media-element name="The Matrix (1999)"
-                     theme="dark"></media-element>`;
-       
+                     theme="dark"></media-element>`
        }
       
       
           if (strUser == 'tv_show_dark'){
        Terminal.innerHTML = `<media-element name="The Simpsons"
-                     type="TV" theme="dark"></media-element>`;
+                     type="TV" theme="dark"></media-element>`
        
        }
       
