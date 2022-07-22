@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MarkdownTag</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+	<link rel="stylesheet" href="./stylesheets/global.css">
+	<link rel="stylesheet" href="./stylesheets/landing.css">
+	<!-- <script src="../dist/markdown-tag-wc-debug.js"></script> -->
+	<script src="../dist/markdown-tag-wc.js"></script>
+	<!-- Made by: DarkenLM -->
+</head>
+  <fork-me link="https://github.com/MarketingPipeline/Fork-Me.js/" side="top-left"></fork-me>
+  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Fork-Me.js/fork-me.min.js"></script> 
+  
+  <script>
+    const TheMovieDB_APIKey = "249f222afb1002186f4d88b2b5418b55"
+  </script>
+<body>
+	<nav>
+		<div class="logo"></div>
+		<ul class="menu">
+    <!---- Hide Docs For Now
+		<div class="menu__item toggle"><span></span></div>
+		<li class="menu__item"><a href="1.0.0.html" class="link link--dark"><i class="fa fa-book"></i> Documentation</a></li>
+----> 
+		<li class="menu__item"><a href="https://github.com/MarketingPipeline/Markdown-Tag" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+		</ul>
+	</nav>
+	<div class="hero">
+		<h1 class="hero__title">Media-Element.js</h1>
+		<p class="hero__description">A custom web element to easily show off your favorite movies, TV shows & songs!
+
+</p>
+	</div>
+	<div class="hero__image" style="box-shadow: none;">
+		<img src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png">
+	</div>
+ 
+   <br>
+ <div  class="select">
+   
+  <select id="select" onchange="test()">
+     <optgroup label="Light Theme">
+    <option value="movie">Movie</option>
+    <option value="tv_show">TV Show</option>
+       <option value="song">Song</option>
+  </optgroup>
+    
+       <optgroup label="Dark Theme">
+    <option value="movie_dark">Movie</option>
+    <option value="tv_show_dark">TV Show</option>
+       <option value="song_dark">Song</option>
+  </optgroup>
+    
+    
+    
+   
+  </select>
+</div></button>
+	<div class="hero__terminal" id="previews" style="animation-delay: 0.5s;  max-height: 600px; overflow-y: hidden;">
+    
+   <media-element name="8 Mile"
+                     theme="dark"></media-element>
+	<!--- <github-repo name="MarketingPip" ></github-repo>
+<button onclick="test()">t</button>
+ -->
+	</div>
+	<div class="wrapper">
+		<div class="installation">
+			<h3 class="section__title">Installation</h3>
+
+<github-md>
+	
+ <br>
+<details><summary>How to use <b>Media-Element.js</b>:</summary>
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to show a <b>Movie</b>:</summary>
+	
+### Usage
+	 
+   
+```html
+ <media-element name="The Mask (1994)"></media-element>
+```
+
+Note: For movies & TV show a API Key is required from TheMovieDB, songs do NOT require a API key.
+
+After getting your API key (if required) place it in your HTML document like so 
+
+```js
+<script>
+ var TheMovieDB_APIKey = "YOUR API KEY HERE"
+ </scrip>
+```
+
+
+
+
+
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+         
+    <script src="https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js"></script> 
+
+
+
+     
+
+
+	   
+	
+<b><i>Note:</b></i> You can show as many movies as you want!
+	
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to show a <b>TV Show</b>:</summary>
+	
+### Usage
+	 
+   
+```html
+ <media-element name="The Twilight Zone (1959)" type="TV"></media-element>
+```
+
+Note: To display TV show(s) - you will require a API key from TheMovieDB.
+
+After getting your API key place it in your HTML document like so 
+
+```js
+<script>
+ var TheMovieDB_APIKey = "YOUR API KEY HERE"
+ </scrip>
+```
+
+
+
+
+
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+         
+    <script src="https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js"></script> 
+
+
+
+     
+
+
+	   
+	
+<b><i>Note:</b></i> You can show as many TV show's as you want
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to show a <b>Song</b>:</summary>
+	
+### Usage
+	 
+
+```html
+ <media-element name="The Beatles In My Life" type="song"></media-element>
+```
+
+Note: You do NOT need a API key to display songs.
+
+
+
+
+
+
+
+
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+         
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.2/dist/media-element.min.js"></script> 
+
+
+
+     
+
+
+	   
+	
+<b><i>Note:</b></i> You show as many song's as you want
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Attribute</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>name</td>
+<td>The movie, TV show or song name you would like to show</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of Media to show details for - options:<code>TV, Song</code>, by default movie type will be shown.</td>
+<td><code>Movie</code></td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>theme</td>
+<td>Set a different color theme - options <code>dark</code></td>
+<td><code>light</code></td>
+<td>No</td>
+</tr>
+
+
+
+</table>
+	
+	
+</details>
+</github-md>
+
+
+		
+		</div>
+    <!--- Hide for now
+		<div class="feature">
+			<div class="feature__item">
+				<h3 class="section__title">Fast & Light</h3>
+				<p>Based on the WebComponents API, each md-tag is guarenteed to be isolated from the DOM and only affects properties inside itself.</p>
+			</div>
+			<div class="feature__item">
+				<h3 class="section__title">Dependency Backup</h3>
+				<p>You can use your use your own version of the supported markdown parsers, or use the predefined version, downloaded straight from the web.</p>
+			</div>
+			<div class="feature__item">
+				<h3 class="section__title">Easy to Configure</h3>
+				<p>Simply edit the md-tag's contents and it will automatically edit the displayed markdown!</p>
+			</div>
+			<div class="feature__item">
+				<h3 class="section__title">Easy and simple API</h3>
+				<p>Modifying the element is easy using our built-in API! Check out the <a href="1.0.0.html#api">Documentation</a> to know more!</p>
+			</div>
+		</div>
+		<div class="callout">
+			<p>Read our documentation for advanced keybindings and customization</p>
+			<a href="1.0.0.html" class="button--primary">Documentation</a>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+--->
+	<script src="./scripts/global.js"></script>
+  <script type="text/javascript">
+    function test(){
+      
+      var e = document.getElementById("select");
+var strUser = e.value;
+      
+      var Terminal = document.getElementById('previews')
+      if (strUser == 'profile'){
+       Terminal.innerHTML = `<github-profile-card name="MarketingPip" ></github-profile-card>`;}
+      
+        if (strUser == 'tv_show'){
+       Terminal.innerHTML = `      <media-element name="The Simpsons"
+                     type="TV"></media-element>`;}
+      
+       if (strUser == 'movie'){
+       Terminal.innerHTML = `<media-element name="Real Genius"
+                     ></media-element>`};
+         
+         
+          if (strUser == 'song'){
+       Terminal.innerHTML = `<media-element name="The Beatles In My Life" type="song"
+                    ></media-element>`;
+       
+       }
+      
+      
+         
+          if (strUser == 'song_dark'){
+       Terminal.innerHTML = `<media-element name="The Beatles In My Life" type="song"
+                     theme="dark"></media-element>`;
+       
+       }
+      
+         
+          if (strUser == 'movie_dark'){
+       Terminal.innerHTML = `<media-element name="The Matrix (1999)"
+                     theme="dark"></media-element>`;
+       
+       }
+      
+      
+          if (strUser == 'tv_show_dark'){
+       Terminal.innerHTML = `<media-element name="The Simpsons"
+                     type="TV" theme="dark"></media-element>`;
+       
+       }
+      
+      
+     
+      
+    }
+</script>
+     <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
+</body>
+</html>
+  
