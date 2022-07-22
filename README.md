@@ -62,9 +62,9 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.1/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.1/dist/media-element.js"></script> 
+    <script src="https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js"></script> 
 
 
 
@@ -106,9 +106,9 @@ After getting your API key place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.1/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.1/dist/media-element.js"></script> 
+    <script src="https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js"></script> 
 
 
 
