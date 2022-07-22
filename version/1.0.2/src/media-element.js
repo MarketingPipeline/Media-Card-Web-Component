@@ -155,7 +155,7 @@ mainSheet.replaceSync(`
   @media screen and (max-width: 768px) {
       .text:after {
     
-    right: 50%;
+    right:0%;
  
 }
     
@@ -262,7 +262,7 @@ darkTheme.replaceSync(`
   @media screen and (max-width: 768px) {
   
      .text:after {
-   
+     right:0%;
     background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
 }
     .info_section {
