@@ -96,19 +96,6 @@ mainSheet.replaceSync(`
     display: block;
     font-size: 0.86rem;
   }
-  
-  .text:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-    width: 100%;
-    height: 40px;
-    border-bottom: 8px solid #fff;
-    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
-}
-
-
   .blur_back {
     position: absolute;
     top: 0;
@@ -153,12 +140,9 @@ mainSheet.replaceSync(`
     }
   }
   @media screen and (max-width: 768px) {
-      .text:after {
-    
-    right:0%;
- 
-}
-    
+    .text:after {
+      right: 0% !important;
+    }
     .media_card .blur_back{
       left:0%;
     }
@@ -239,8 +223,7 @@ darkTheme.replaceSync(`
   .text {
     color: #cfd6e1;
   }
-  
-    .text:after {
+  .text:after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -249,22 +232,25 @@ darkTheme.replaceSync(`
     height: 40px;
     border-bottom: 8px solid black;
     background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
-}
+  }
   .collection-name,
   .primary-genre-name {
     color: #cfd6e1;
   }
   @media screen and (min-width: 768px) {
+    .text:after {
+      right: 0% !important;
+      background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
+    }
     .info_section {
       background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
     }
   }
   @media screen and (max-width: 768px) {
-  
-     .text:after {
-     right:0%;
-    background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
-}
+    .text:after {
+      right:0%;
+      background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
+    }
     .info_section {
       background: linear-gradient(to top, #141413 50%, transparent 100%);
     }
@@ -382,8 +368,7 @@ class Media_Details extends HTMLElement {
     } else {
       this.minutes.remove()
     }
-    const genres = this.extraData.genres.map(genre => genre.name).join(', ')
-    this.showMinutes.innerText = genres
+    this.showMinutes.innerText = this.extraData.genres.map(genre => genre.name).join(', ')
   }
 
   async populateError(error) {
@@ -403,12 +388,9 @@ class Media_Details extends HTMLElement {
     return (typeof data.total_results !== 'undefined' && data.total_results === 0)
         ? true
         : (typeof data.resultCount !== 'undefined' && data.resultCount === 0)
-            ? true
-            : false
   }
 
   populateCard(data) {
-    //console.log(data)
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
       this.h1.innerText = 'Error'
@@ -437,13 +419,10 @@ class Media_Details extends HTMLElement {
         this.collectionName.innerHTML = this.data.collectionName
         this.primaryGenreName.innerHTML = this.data.primaryGenreName
       } else {
-
-         var Background = `https://image.tmdb.org/t/p/w500${this.data.backdrop_path}`
-         if (this.data.backdrop_path == undefined || this.data.backdrop_path == null){
-           
-        Background = `https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg`
-        } 
-        this.blurBack.style.backgroundImage = `url( '${Background}' )`
+        if(typeof data.results[0].backdrop_path !== 'undefined'){
+          // We don't need to add the default image again - just add the new one if it exists.
+          this.blurBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.results[0].backdrop_path}')`
+        }
         this.h1.innerText = (this.type === 'film')
             ? this.data.original_title
             : this.data.original_name
@@ -456,8 +435,6 @@ class Media_Details extends HTMLElement {
         } else{
           this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
         }
-        
-       // console.log(this.locandina.src)
       }
     }
   }
