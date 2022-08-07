@@ -96,16 +96,6 @@ mainSheet.replaceSync(`
     display: block;
     font-size: 0.86rem;
   }
-  .text:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-    width: 100%;
-    height: 40px;
-    border-bottom: 8px solid #fff;
-    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
-  }
   .blur_back {
     position: absolute;
     top: 0;
@@ -257,6 +247,10 @@ darkTheme.replaceSync(`
     }
   }
   @media screen and (max-width: 768px) {
+    .text:after {
+      right:0%;
+      background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
+    }
     .info_section {
       background: linear-gradient(to top, #141413 50%, transparent 100%);
     }
