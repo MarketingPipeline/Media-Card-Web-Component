@@ -96,6 +96,19 @@ mainSheet.replaceSync(`
     display: block;
     font-size: 0.86rem;
   }
+  
+  
+  .text:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    width: 100%;
+    height: 40px;
+    border-bottom: 8px solid #fff;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+}
+  
   .blur_back {
     position: absolute;
     top: 0;
@@ -223,7 +236,7 @@ darkTheme.replaceSync(`
   .text {
     color: #cfd6e1;
   }
-  .text:after {
+   .text:after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -232,7 +245,8 @@ darkTheme.replaceSync(`
     height: 40px;
     border-bottom: 8px solid black;
     background: linear-gradient(to top, black, rgba(255, 255, 255, 0));
-  }
+}
+  
   .collection-name,
   .primary-genre-name {
     color: #cfd6e1;
