@@ -407,25 +407,20 @@ class Media_Details extends HTMLElement {
   populateCard(data) {
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
-      this.h1.innerText = 'Error'
-      this.h4.innerText = `Unable to find media`
-      this.minutes.remove()
-      this.showMinutes.remove()
-      this.locandina.remove()
-      this.locandinaHolding.style.display = 'block'
+      this.populateError({
+        status_message: `Unable to find media`
+      })
     } else {
       this.data = data.results[0] // 🤞
       if (this.type !== 'song') {
-        fetch(`https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
-            .then(res => res.json())
-            .then(data => this.populateCardExtras(data))
+        this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
+        this.getExtraDetails()
       } else {
         this.minutes.remove()
       }
 
       if (this.type === 'song') {
         this.showMinutes.remove()
-        this.blurBack.style.backgroundImage = `url( 'https://image.tmdb.org/t/p/w500${this.data.backdrop_path}' )`
         this.h1.innerText = this.data.trackName
         this.h4.innerText = this.data.artistName
         this.locandina.src = this.data.artworkUrl100
@@ -468,6 +463,25 @@ class Media_Details extends HTMLElement {
     } catch(error) {
       this.populateError({
         status_message: 'There was in issue with fetching the media details'
+      })
+    }
+  }
+
+  async getExtraDetails() {
+    try {
+      const response = await fetch(this.extraEndPoint, {
+        mode: 'cors'
+      })
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        this.populateCardExtras(jsonResponse)
+      } else {
+        const jsonError = await response.json();
+        this.populateError(jsonError)
+      }
+    } catch(error) {
+      this.populateError({
+        status_message: 'There was in issue with fetching the extra details for the media'
       })
     }
   }

@@ -30,7 +30,7 @@ class Media_Details extends HTMLElement {
     }
        if (this.type == "song"){
     
-     EndPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
+     EndPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song`
   //  console.log(EndPoint)
     }
     
