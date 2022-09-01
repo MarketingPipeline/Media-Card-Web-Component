@@ -290,10 +290,31 @@ songTheme.replaceSync(`
     }
   }
 `)
+const bookTheme = new CSSStyleSheet();
+bookTheme.replaceSync(`
+  .media_desc {
+    display: none;
+  }
+  .collection-name, 
+  .primary-genre-name {
+    display: block;
+  }
+  @media screen and (min-width: 768px) {
+    .media_card {
+      min-height: 170px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .media_card {
+      min-height: 240px;
+    }
+  }
+`)
 class Media_Details extends HTMLElement {
   static get observedAttributes() {
     return [
       'name',
+      'author',
       'theme',
       'type'
     ];
@@ -309,6 +330,9 @@ class Media_Details extends HTMLElement {
     }
     if(this.type === 'song') {
       sheets.push(songTheme)
+    }
+    if(this.type === 'book') {
+      sheets.push(bookTheme)
     }
     this.shadow.adoptedStyleSheets = sheets;
     this.shadow.innerHTML = `
@@ -345,7 +369,7 @@ class Media_Details extends HTMLElement {
     this.blurBack = this.shadow.querySelector('.blur_back')
     this.collectionName = this.shadow.querySelector('.collection-name')
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
-    if(typeof TheMovieDB_APIKey === 'undefined' && this.type !== 'song'){
+    if(typeof TheMovieDB_APIKey === 'undefined' && (this.type === 'tv' || this.type === 'film')){
       this.populateError({
         status_message: 'Please provide an API Key'
       })
@@ -372,6 +396,14 @@ class Media_Details extends HTMLElement {
       // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
+
+    if(this.type === 'book'){
+      this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
+      if(this.author){
+        this.endPoint += `&author_name=${this.author}`
+      }
+    }
+
     this.getDetails()
   }
 
@@ -401,7 +433,9 @@ class Media_Details extends HTMLElement {
   emptyResults(data) {
     return (typeof data.total_results !== 'undefined' && data.total_results === 0)
         ? true
-        : (typeof data.resultCount !== 'undefined' && data.resultCount === 0)
+        : (typeof data.resultCount !== 'undefined' && data.resultCount === 0) ?
+            true
+            : data.numFound === 0
   }
 
   populateCard(data) {
@@ -411,23 +445,10 @@ class Media_Details extends HTMLElement {
         status_message: `Unable to find media`
       })
     } else {
-      this.data = data.results[0] // 🤞
-      if (this.type !== 'song') {
+      if (this.type === 'tv' || this.type === 'film') {
+        this.data = data.results[0] // 🤞
         this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
         this.getExtraDetails()
-      } else {
-        this.minutes.remove()
-      }
-
-      if (this.type === 'song') {
-        this.showMinutes.remove()
-        this.h1.innerText = this.data.trackName
-        this.h4.innerText = this.data.artistName
-        this.locandina.src = this.data.artworkUrl100
-        this.blurBack.style.background = `url("${this.data.artworkUrl100}")`
-        this.collectionName.innerHTML = this.data.collectionName
-        this.primaryGenreName.innerHTML = this.data.primaryGenreName
-      } else {
         if(typeof data.results[0].backdrop_path !== 'undefined'){
           // We don't need to add the default image again - just add the new one if it exists.
           this.blurBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.results[0].backdrop_path}')`
@@ -440,9 +461,39 @@ class Media_Details extends HTMLElement {
             : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
         this.text.innerText = this.data.overview
         if (this.data.poster_path == null){
-        this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
+          this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
         } else{
           this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
+        }
+      }
+      if (this.type === 'song') {
+        this.data = data.results[0] // 🤞
+        this.minutes.remove()
+        this.showMinutes.remove()
+        this.h1.innerText = this.data.trackName
+        this.h4.innerText = this.data.artistName
+        this.locandina.src = this.data.artworkUrl100
+        this.blurBack.style.background = `url("${this.data.artworkUrl100}")`
+        this.collectionName.innerHTML = this.data.collectionName
+        this.primaryGenreName.innerHTML = this.data.primaryGenreName
+      }
+      if (this.type === 'book') {
+        this.data = data.docs[0] // 🤞
+        console.log(this.data)
+        this.h1.innerText = this.data.title
+        this.h4.innerText = this.data.author_name.join(', ')
+        if(this.data.cover_i) {
+          this.locandina.src = `https://covers.openlibrary.org/b/id/${this.data.cover_i}-M.jpg`
+          this.blurBack.style.background = `url("https://covers.openlibrary.org/b/id/${this.data.cover_i}-S.jpg")`
+        }else{
+          this.locandina.remove()
+          this.locandinaHolding.remove()
+        }
+        if(this.data.number_of_pages_median) {
+           this.minutes.innerText = `${this.data.number_of_pages_median} pages`
+        } else {
+          this.minutes.remove()
+          this.showMinutes.remove()
         }
       }
     }
@@ -488,6 +539,9 @@ class Media_Details extends HTMLElement {
 
   get name() {
     return this.getAttribute('name')
+  }
+  get author() {
+    return this.getAttribute('author')
   }
   get theme() {
     return this.getAttribute('theme') || 'light'
