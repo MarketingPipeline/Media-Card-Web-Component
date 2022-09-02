@@ -398,12 +398,10 @@ class Media_Details extends HTMLElement {
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
 
-      if(this.type === 'anime'){
-      // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
-      this.endPoint = `https://kitsu.io/api/edge/anime?filter%5Btext%5D=${this.name}&page%5Blimit%5D=1` // for testing
+    if(this.type === 'anime'){
+      this.endPoint = `https://kitsu.io/api/edge/anime?filter[text]=${this.name}&page[limit]=1&include=genres`
     }
 
-    
     if(this.type === 'book'){
       this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
       if(this.author){
@@ -486,7 +484,6 @@ class Media_Details extends HTMLElement {
       }
       if (this.type === 'book') {
         this.data = data.docs[0] // 🤞
-        console.log(this.data)
         this.h1.innerText = this.data.title
         this.h4.innerText = this.data.author_name.join(', ')
         if(this.data.cover_i) {
@@ -502,30 +499,39 @@ class Media_Details extends HTMLElement {
           this.minutes.remove()
           this.showMinutes.remove()
         }
-   
       }
-           if (this.type === "anime"){
-          this.data = data // 🤞
-
-             // todo - allow user to set language
-        this.h1.innerText = data.data[0].attributes.titles.en
-            console.log(data.data[0])
-             
-           this.blurBack.style.backgroundImage =  data.data[0].attributes.posterImage.tiny
-        
-             
-             // to do - if no result default image poster(s) 
-             this.locandina.src = data.data[0].attributes.posterImage.tiny
-             
-          
-        this.blurBack.style.background = `url("${data.data[0].attributes.posterImage.medium}")`
-     this.text.innerText = data.data[0].attributes.synopsis 
-             
-             
-       // to do - fetch Genres    
-        /* https://kitsu.io/api/edge/anime/${data.data[0].id}/genres */      
-             
+      if (this.type === "anime"){
+        this.data = data.data[0] // 🤞
+        // todo - allow user to set language
+        this.h1.innerText = this.data.attributes.titles.en
+        if(this.data.attributes.startDate) {
+          this.h4.innerText = new Date(this.data.attributes.startDate).getFullYear()
+        }else{
+          this.h4.remove()
         }
+        if(this.data.attributes.posterImage.tiny) {
+          this.locandina.src = this.data.attributes.posterImage.tiny
+        }else{
+          this.locandina.remove()
+          this.locandinaHolding.remove()
+        }
+        if(this.data.attributes.totalLength) {
+          this.minutes.innerText = `${this.data.attributes.totalLength} minutes`
+        } else {
+          this.minutes.remove()
+        }
+        if(this.data.attributes.posterImage.large) {
+          this.blurBack.style.background = `url("${this.data.attributes.posterImage.large}")`
+        }
+        if(this.data.attributes.synopsis) {
+          this.text.innerText = this.data.attributes.synopsis
+        }
+        if(data.included){
+          this.showMinutes.innerText = data.included.map(genre => genre.attributes.name).join(', ')
+        }else{
+          this.showMinutes.remove()
+        }
+      }
     }
   }
 
