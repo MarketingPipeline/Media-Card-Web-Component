@@ -334,6 +334,7 @@ class Media_Details extends HTMLElement {
     if(this.type === 'book') {
       sheets.push(bookTheme)
     }
+     
     this.shadow.adoptedStyleSheets = sheets;
     this.shadow.innerHTML = `
       <div class="media_card skeleton">
@@ -397,6 +398,12 @@ class Media_Details extends HTMLElement {
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
 
+      if(this.type === 'anime'){
+      // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
+      this.endPoint = `https://kitsu.io/api/edge/anime?filter%5Btext%5D=${this.name}&page%5Blimit%5D=1` // for testing
+    }
+
+    
     if(this.type === 'book'){
       this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
       if(this.author){
@@ -495,7 +502,30 @@ class Media_Details extends HTMLElement {
           this.minutes.remove()
           this.showMinutes.remove()
         }
+   
       }
+           if (this.type === "anime"){
+          this.data = data // 🤞
+
+             // todo - allow user to set language
+        this.h1.innerText = data.data[0].attributes.titles.en
+            console.log(data.data[0])
+             
+           this.blurBack.style.backgroundImage =  data.data[0].attributes.posterImage.tiny
+        
+             
+             // to do - if no result default image poster(s) 
+             this.locandina.src = data.data[0].attributes.posterImage.tiny
+             
+          
+        this.blurBack.style.background = `url("${data.data[0].attributes.posterImage.medium}")`
+     this.text.innerText = data.data[0].attributes.synopsis 
+             
+             
+       // to do - fetch Genres    
+        /* https://kitsu.io/api/edge/anime/${data.data[0].id}/genres */      
+             
+        }
     }
   }
 
