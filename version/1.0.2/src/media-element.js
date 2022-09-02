@@ -405,7 +405,7 @@ class Media_Details extends HTMLElement {
     if(this.type === 'book'){
       this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
       if(this.author){
-        this.endPoint += `&author_name=${this.author}`
+        this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1&author=${this.author}`
       }
     }
 
