@@ -370,6 +370,12 @@ class Media_Details extends HTMLElement {
     this.blurBack = this.shadow.querySelector('.blur_back')
     this.collectionName = this.shadow.querySelector('.collection-name')
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
+  if (!this.name){
+    this.populateError({
+        status_message: `Please provide an ${this.type} name.`
+      })
+    return;
+  }  
     if(typeof TheMovieDB_APIKey === 'undefined' && (this.type === 'tv' || this.type === 'film')){
       this.populateError({
         status_message: 'Please provide an API Key'
