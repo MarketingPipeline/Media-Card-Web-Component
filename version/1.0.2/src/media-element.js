@@ -460,7 +460,7 @@ class Media_Details extends HTMLElement {
         this.data = data.results[0] // 🤞
         this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
         this.getExtraDetails()
-        if(typeof data.results[0].backdrop_path !== 'undefined'){
+        if(data.results[0].backdrop_path !== null){
           // We don't need to add the default image again - just add the new one if it exists.
           this.blurBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.results[0].backdrop_path}')`
         }
@@ -468,8 +468,9 @@ class Media_Details extends HTMLElement {
             ? this.data.original_title
             : this.data.original_name
         this.h4.innerText = (this.type === 'film')
-            ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
-            : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
+            ?  this.data.release_date != (null) ? this.data.release_date.replace(/\-[0-9]{2}/g, '') : ""
+        
+            : this.data.first_air_date != (null) ? this.data.first_air_date.replace(/\-[0-9]{2}/g, '') : ""
         this.text.innerText = this.data.overview
         if (this.data.poster_path == null){
           this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
