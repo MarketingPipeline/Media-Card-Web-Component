@@ -426,6 +426,15 @@ class Media_Details extends HTMLElement {
             : data.numFound === 0
   }
 
+  getPosterImage(src) {
+    return new Promise((resolve, reject) => {
+      let img = new Image()
+      img.onload = () => resolve(img.src)
+      img.onerror = reject
+      img.src = src
+    })
+  }
+
   populateCard(data) {
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
@@ -437,7 +446,7 @@ class Media_Details extends HTMLElement {
         this.data = data.results[0] // 🤞
         this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
         this.getExtraDetails()
-        if(data.results[0].backdrop_path !== null){
+        if(typeof data.results[0].backdrop_path !== 'undefined'){
           // We don't need to add the default image again - just add the new one if it exists.
           this.blurBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.results[0].backdrop_path}')`
         }
@@ -445,9 +454,8 @@ class Media_Details extends HTMLElement {
             ? this.data.original_title
             : this.data.original_name
         this.h4.innerText = (this.type === 'film')
-            ?  this.data.release_date != (null) ? this.data.release_date.replace(/\-[0-9]{2}/g, '') : ""
-        
-            : this.data.first_air_date != (null) ? this.data.first_air_date.replace(/\-[0-9]{2}/g, '') : ""
+            ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
+            : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
         this.text.innerText = this.data.overview
         if (this.data.poster_path == null){
           this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
@@ -568,3 +576,23 @@ class Media_Details extends HTMLElement {
 }
 
 window.customElements.define("media-element", Media_Details)
+const CleanCSS = require('clean-css')
+const process = require('process')
+
+let input = ''
+
+process.stdin.on('readable', () => {
+  let chunk = process.stdin.read()
+  if(chunk != null) input += chunk
+})
+
+process.stdin.on('end', () => {
+  let cssRe = /\/\*compress\*\/(.|[\n\r])+?\/\*endcompress\*\//
+
+  let compressedOutput = input.replace(cssRe, (match, p1, offset, string) => {
+    let output = new CleanCSS({}).minify(match)
+    return output.styles
+  });
+  process.stdout.write(compressedOutput)
+  process.exit()
+})

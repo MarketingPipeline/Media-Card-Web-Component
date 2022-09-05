@@ -1,0 +1,25 @@
+{
+  "name": "mediaelementjs",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">\r <a href=\"https://github.com/MarketingPipeline/Media-Element.js\"> <img height=\"300px\" src=\"https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png\"/> </a> \r </div>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "type .\\version\\1.0.2\\src\\media-element.js | node build\\compress-css.js | node build\\compress-html.js | babili > .\\version\\1.0.2\\dist\\media-element.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annoyingmouse/Media-Element.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annoyingmouse/Media-Element.js/issues"
+  },
+  "homepage": "https://github.com/annoyingmouse/Media-Element.js#readme",
+  "devDependencies": {
+    "babili": "^0.1.4",
+    "clean-css": "^5.3.1",
+    "html-minifier": "^4.0.0"
+  }
+}
