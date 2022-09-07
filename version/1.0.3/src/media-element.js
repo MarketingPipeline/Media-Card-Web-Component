@@ -132,7 +132,7 @@ mainSheet.replaceSync(`/*compress*/
       min-height: 350px;
     }
     h1 {
-      width: 200%;
+      width: 174%;
     }
     .media_header {
       max-width: 50%;
@@ -350,12 +350,26 @@ class Media_Details extends HTMLElement {
     this.blurBack = this.shadow.querySelector('.blur_back')
     this.collectionName = this.shadow.querySelector('.collection-name')
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
+    
+if (this.type){
+        if (this.type !== "tv"  && this.type !== "book" && this.type !== "song" && this.type !== "film"){
+        this.populateError({
+        status_message: `Please provide a valid type attribute.`
+      })
+      return;
+    }  
+}
+    
   if (!this.name){
     this.populateError({
         status_message: `Please provide an ${this.type} name.`
       })
     return;
   }  
+    
+
+      
+      
     if(typeof TheMovieDB_APIKey === 'undefined' && (this.type === 'tv' || this.type === 'film')){
       this.populateError({
         status_message: 'Please provide an API Key'
@@ -384,9 +398,7 @@ class Media_Details extends HTMLElement {
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
 
-    if(this.type === 'anime'){
-      this.endPoint = `https://kitsu.io/api/edge/anime?filter[text]=${this.name}&page[limit]=1&include=genres`
-    }
+
 
     if(this.type === 'book'){
       this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
@@ -487,34 +499,7 @@ class Media_Details extends HTMLElement {
           this.showMinutes.remove()
         }
       }
-      if (this.type === "anime"){
-        this.data = data.data[0] // 🤞
-        // todo - allow user to set language
-        this.h1.innerText = this.data.attributes.titles.en
-        if(this.data.attributes.startDate) {
-          this.h4.innerText = new Date(this.data.attributes.startDate).getFullYear()
-        }else{
-          this.h4.remove()
-        }
-        if(this.data.attributes.posterImage.tiny) {
-          this.locandina.src = this.data.attributes.posterImage.tiny
-        }else{
-          this.locandina.remove()
-          this.locandinaHolding.remove()
-        }
-        this.minutes.remove()
-        if(this.data.attributes.posterImage.large) {
-          this.blurBack.style.background = `url("${this.data.attributes.posterImage.large}")`
-        }
-        if(this.data.attributes.synopsis) {
-          this.text.innerText = this.data.attributes.synopsis
-        }
-        if(data.included){
-          this.showMinutes.innerText = data.included.map(genre => genre.attributes.name).join(', ')
-        }else{
-          this.showMinutes.remove()
-        }
-      }
+     
     }
   }
 
