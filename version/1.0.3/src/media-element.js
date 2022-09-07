@@ -1,3 +1,6 @@
+import "https://polyfill.io/v3/polyfill.js?features=Array.prototype.map,fetch,Promise";
+import "https://unpkg.com/construct-style-sheets-polyfill";
+
 const mainSheet = new CSSStyleSheet()
 mainSheet.replaceSync(`/*compress*/
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
