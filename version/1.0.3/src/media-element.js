@@ -299,7 +299,9 @@ class Media_Details extends HTMLElement {
       'name',
       'author',
       'theme',
-      'type'
+      'type',
+      'episode',
+      'season'
     ];
   }
   constructor() {
@@ -352,7 +354,7 @@ class Media_Details extends HTMLElement {
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
     
 if (this.type){
-        if (this.type !== "tv"  && this.type !== "book" && this.type !== "song" && this.type !== "film"){
+        if (this.type !== "tv"  && this.type !== "book" && this.type !== "song" && this.type !== "film"  && this.type !== "episode"){
         this.populateError({
         status_message: `Please provide a valid type attribute.`
       })
@@ -391,9 +393,40 @@ if (this.type){
       if(this.year){
         this.endPoint += `&${this.type === 'film' ? 'year' : 'first_air_date_year'}=${this.year}`
       }
+     
     }
 
-    if(this.type === 'song'){
+    if(this.type === 'episode'){
+      
+      
+      if (this.episode && this.season){
+            this.endPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
+    
+
+      } else {
+        if (!this.episode){
+    this.populateError({
+        status_message: `Please provide an ${this.type} number.`
+      })
+    return;
+  }  
+      
+    if (!this.season){
+    this.populateError({
+        status_message: `Please provide an TV season number.`
+      })
+    return;
+  }  
+      
+        
+        
+      }
+          
+ 
+
+    }
+    
+        if(this.type === 'song'){
       // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
@@ -417,7 +450,23 @@ if (this.type){
     } else {
       this.minutes.remove()
     }
-    this.showMinutes.innerText = this.extraData.genres.map(genre => genre.name).join(', ')
+  if (this.type != "episode"){
+      this.showMinutes.innerText = this.extraData.genres.map(genre => genre.name).join(', ')
+  }
+    
+    if (this.type === "episode"){
+    //  console.log( this.extraData)
+        this.showMinutes.innerText = `Season ${this.extraData.season_number}`
+        
+      this.text.innerText = this.extraData.overview;
+      this.h1.innerText = this.extraData.name;
+      this.h4.innerText = `Episode #${this.extraData.episode_number}`
+       if (this.extraData.still_path == null){
+          this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
+        } else{
+          this.locandina.src = `https://image.tmdb.org/t/p/w500${this.extraData.still_path}`
+        }
+    }
   }
 
   async populateError(error) {
@@ -442,15 +491,24 @@ if (this.type){
   }
 
   populateCard(data) {
+  
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
       this.populateError({
         status_message: `Unable to find media`
       })
     } else {
-      if (this.type === 'tv' || this.type === 'film') {
+
+      
+      if (this.type === 'tv' || this.type === 'film' || this.type === "episode") {
         this.data = data.results[0] // 🤞
-        this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
+      if (this.type === "episode"){
+this.extraEndPoint = `https://api.themoviedb.org/3/tv/${this.data.id}/season/${this.season}/episode/${this.episode}?api_key=${TheMovieDB_APIKey}`
+        
+      } else {
+          this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
+      }
+      
         this.getExtraDetails()
         if(data.results[0].backdrop_path !== null){
           // We don't need to add the default image again - just add the new one if it exists.
@@ -481,6 +539,7 @@ if (this.type){
         this.collectionName.innerHTML = this.data.collectionName
         this.primaryGenreName.innerHTML = this.data.primaryGenreName
       }
+      
       if (this.type === 'book') {
         this.data = data.docs[0] // 🤞
         this.h1.innerText = this.data.title
@@ -543,6 +602,12 @@ if (this.type){
 
   get name() {
     return this.getAttribute('name')
+  }
+       get season() {
+    return this.getAttribute('season')
+  }
+    get episode() {
+    return this.getAttribute('episode')
   }
   get author() {
     return this.getAttribute('author')
