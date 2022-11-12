@@ -1,5 +1,8 @@
+import "https://polyfill.io/v3/polyfill.js?features=Array.prototype.map,fetch,Promise";
+import "https://unpkg.com/construct-style-sheets-polyfill";
+
 const mainSheet = new CSSStyleSheet()
-mainSheet.replaceSync(`
+mainSheet.replaceSync(`/*compress*/
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
   :host { 
     --background: linear-gradient(270deg, #cfcfcf, #8b8b8b);
@@ -129,7 +132,7 @@ mainSheet.replaceSync(`
       min-height: 350px;
     }
     h1 {
-      width: 200%;
+      width: 174%;
     }
     .media_header {
       max-width: 50%;
@@ -217,9 +220,9 @@ mainSheet.replaceSync(`
       background-position-x: -200%;
     }
   }
-`)
+/*endcompress*/`)
 const darkTheme = new CSSStyleSheet()
-darkTheme.replaceSync(`
+darkTheme.replaceSync(`/*compress*/
   h1 {
     color: white;
   }
@@ -269,9 +272,9 @@ darkTheme.replaceSync(`
       background: linear-gradient(to top, #141413 50%, transparent 100%);
     }
   }
-`)
-const songTheme = new CSSStyleSheet();
-songTheme.replaceSync(`
+/*endcompress*/`)
+const songAndBookTheme = new CSSStyleSheet();
+songAndBookTheme.replaceSync(`/*compress*/
   .media_desc {
     display: none;
   }
@@ -289,13 +292,16 @@ songTheme.replaceSync(`
       min-height: 240px;
     }
   }
-`)
-class Media_Details extends HTMLElement {
+/*endcompress*/`)
+class Media_Card extends HTMLElement {
   static get observedAttributes() {
     return [
       'name',
+      'author',
       'theme',
-      'type'
+      'type',
+      'episode',
+      'season'
     ];
   }
   constructor() {
@@ -307,11 +313,12 @@ class Media_Details extends HTMLElement {
     if(this.theme !== 'light') {
       sheets.push(darkTheme)
     }
-    if(this.type === 'song') {
-      sheets.push(songTheme)
+    if(this.type === 'song' || this.type === 'book') {
+      sheets.push(songAndBookTheme)
     }
+
     this.shadow.adoptedStyleSheets = sheets;
-    this.shadow.innerHTML = `
+    this.shadow.innerHTML = `<!--compress-->
       <div class="media_card skeleton">
         <div class="info_section">
           <div class="media_header">
@@ -333,7 +340,7 @@ class Media_Details extends HTMLElement {
         </div>
         <div class="blur_back"></div>
       </div>
-    `
+    <!--endcompress-->`
     this.card = this.shadow.querySelector('.media_card')
     this.locandina = this.shadow.querySelector('.locandina')
     this.locandinaHolding = this.shadow.querySelector('.locandina-holding')
@@ -345,7 +352,27 @@ class Media_Details extends HTMLElement {
     this.blurBack = this.shadow.querySelector('.blur_back')
     this.collectionName = this.shadow.querySelector('.collection-name')
     this.primaryGenreName = this.shadow.querySelector('.primary-genre-name')
-    if(typeof TheMovieDB_APIKey === 'undefined' && this.type !== 'song'){
+    
+if (this.type){
+        if (this.type !== "tv"  && this.type !== "book" && this.type !== "song" && this.type !== "film"  && this.type !== "episode"){
+        this.populateError({
+        status_message: `Please provide a valid type attribute.`
+      })
+      return;
+    }  
+}
+    
+  if (!this.name){
+    this.populateError({
+        status_message: `Please provide an ${this.type} name.`
+      })
+    return;
+  }  
+    
+
+      
+      
+    if(typeof TheMovieDB_APIKey === 'undefined' && (this.type === 'tv' || this.type === 'film')){
       this.populateError({
         status_message: 'Please provide an API Key'
       })
@@ -366,12 +393,53 @@ class Media_Details extends HTMLElement {
       if(this.year){
         this.endPoint += `&${this.type === 'film' ? 'year' : 'first_air_date_year'}=${this.year}`
       }
+     
     }
 
-    if(this.type === 'song'){
+    if(this.type === 'episode'){
+      
+      
+      if (this.episode && this.season){
+            this.endPoint = `https://api.themoviedb.org/3/search/tv?api_key=${TheMovieDB_APIKey}&language=en-US&query=${this.mediaName}`
+    
+
+      } else {
+        if (!this.episode){
+    this.populateError({
+        status_message: `Please provide an ${this.type} number.`
+      })
+    return;
+  }  
+      
+    if (!this.season){
+    this.populateError({
+        status_message: `Please provide an TV season number.`
+      })
+    return;
+  }  
+      
+        
+        
+      }
+          
+ 
+
+    }
+    
+        if(this.type === 'song'){
       // this.endPoint = `https://itunes.apple.com/search?term=${this.name}&entity=song`
       this.endPoint = `https://search-itunes.vercel.app?term=${this.name}&entity=song` // for testing
     }
+
+
+
+    if(this.type === 'book'){
+      this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1`
+      if(this.author){
+        this.endPoint = `https://openlibrary.org/search.json?title=${this.name}&limit=1&author=${this.author}`
+      }
+    }
+
     this.getDetails()
   }
 
@@ -382,7 +450,23 @@ class Media_Details extends HTMLElement {
     } else {
       this.minutes.remove()
     }
-    this.showMinutes.innerText = this.extraData.genres.map(genre => genre.name).join(', ')
+  if (this.type != "episode"){
+      this.showMinutes.innerText = this.extraData.genres.map(genre => genre.name).join(', ')
+  }
+    
+    if (this.type === "episode"){
+    //  console.log( this.extraData)
+        this.showMinutes.innerText = `Season ${this.extraData.season_number}`
+        
+      this.text.innerText = this.extraData.overview;
+      this.h1.innerText = this.extraData.name;
+      this.h4.innerText = `Episode #${this.extraData.episode_number}`
+       if (this.extraData.still_path == null){
+          this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
+        } else{
+          this.locandina.src = `https://image.tmdb.org/t/p/w500${this.extraData.still_path}`
+        }
+    }
   }
 
   async populateError(error) {
@@ -401,39 +485,32 @@ class Media_Details extends HTMLElement {
   emptyResults(data) {
     return (typeof data.total_results !== 'undefined' && data.total_results === 0)
         ? true
-        : (typeof data.resultCount !== 'undefined' && data.resultCount === 0)
+        : (typeof data.resultCount !== 'undefined' && data.resultCount === 0) ?
+            true
+            : data.numFound === 0
   }
 
   populateCard(data) {
+  
     this.card.classList.remove('skeleton')
     if(this.emptyResults(data)){
-      this.h1.innerText = 'Error'
-      this.h4.innerText = `Unable to find media`
-      this.minutes.remove()
-      this.showMinutes.remove()
-      this.locandina.remove()
-      this.locandinaHolding.style.display = 'block'
+      this.populateError({
+        status_message: `Unable to find media`
+      })
     } else {
-      this.data = data.results[0] // 🤞
-      if (this.type !== 'song') {
-        fetch(`https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`)
-            .then(res => res.json())
-            .then(data => this.populateCardExtras(data))
-      } else {
-        this.minutes.remove()
-      }
 
-      if (this.type === 'song') {
-        this.showMinutes.remove()
-        this.blurBack.style.backgroundImage = `url( 'https://image.tmdb.org/t/p/w500${this.data.backdrop_path}' )`
-        this.h1.innerText = this.data.trackName
-        this.h4.innerText = this.data.artistName
-        this.locandina.src = this.data.artworkUrl100
-        this.blurBack.style.background = `url("${this.data.artworkUrl100}")`
-        this.collectionName.innerHTML = this.data.collectionName
-        this.primaryGenreName.innerHTML = this.data.primaryGenreName
+      
+      if (this.type === 'tv' || this.type === 'film' || this.type === "episode") {
+        this.data = data.results[0] // 🤞
+      if (this.type === "episode"){
+this.extraEndPoint = `https://api.themoviedb.org/3/tv/${this.data.id}/season/${this.season}/episode/${this.episode}?api_key=${TheMovieDB_APIKey}`
+        
       } else {
-        if(typeof data.results[0].backdrop_path !== 'undefined'){
+          this.extraEndPoint = `https://api.themoviedb.org/3/${this.type === 'film' ? 'movie' : 'tv'}/${this.data.id}?api_key=${TheMovieDB_APIKey}`
+      }
+      
+        this.getExtraDetails()
+        if(data.results[0].backdrop_path !== null){
           // We don't need to add the default image again - just add the new one if it exists.
           this.blurBack.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.results[0].backdrop_path}')`
         }
@@ -441,15 +518,47 @@ class Media_Details extends HTMLElement {
             ? this.data.original_title
             : this.data.original_name
         this.h4.innerText = (this.type === 'film')
-            ? this.data.release_date.replace(/\-[0-9]{2}/g, '')
-            : this.data.first_air_date.replace(/\-[0-9]{2}/g, '')
+            ?  this.data.release_date != (null) ? this.data.release_date.replace(/\-[0-9]{2}/g, '') : ""
+        
+            : this.data.first_air_date != (null) ? this.data.first_air_date.replace(/\-[0-9]{2}/g, '') : ""
         this.text.innerText = this.data.overview
         if (this.data.poster_path == null){
-        this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
+          this.locandina.src = `https://www.movienewz.com/img/films/poster-holder.jpg`
         } else{
           this.locandina.src = `https://image.tmdb.org/t/p/w500${this.data.poster_path}`
         }
       }
+      if (this.type === 'song') {
+        this.data = data.results[0] // 🤞
+        this.minutes.remove()
+        this.showMinutes.remove()
+        this.h1.innerText = this.data.trackName
+        this.h4.innerText = this.data.artistName
+        this.locandina.src = this.data.artworkUrl100
+        this.blurBack.style.background = `url("${this.data.artworkUrl100}")`
+        this.collectionName.innerHTML = this.data.collectionName
+        this.primaryGenreName.innerHTML = this.data.primaryGenreName
+      }
+      
+      if (this.type === 'book') {
+        this.data = data.docs[0] // 🤞
+        this.h1.innerText = this.data.title
+        this.h4.innerText = this.data.author_name.join(', ')
+        if(this.data.cover_i) {
+          this.locandina.src = `https://covers.openlibrary.org/b/id/${this.data.cover_i}-M.jpg`
+          this.blurBack.style.background = `url("https://covers.openlibrary.org/b/id/${this.data.cover_i}-S.jpg")`
+        }else{
+          this.locandina.remove()
+          this.locandinaHolding.remove()
+        }
+        if(this.data.number_of_pages_median) {
+           this.minutes.innerText = `${this.data.number_of_pages_median} pages`
+        } else {
+          this.minutes.remove()
+          this.showMinutes.remove()
+        }
+      }
+     
     }
   }
 
@@ -472,8 +581,36 @@ class Media_Details extends HTMLElement {
     }
   }
 
+  async getExtraDetails() {
+    try {
+      const response = await fetch(this.extraEndPoint, {
+        mode: 'cors'
+      })
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        this.populateCardExtras(jsonResponse)
+      } else {
+        const jsonError = await response.json();
+        this.populateError(jsonError)
+      }
+    } catch(error) {
+      this.populateError({
+        status_message: 'There was in issue with fetching the extra details for the media'
+      })
+    }
+  }
+
   get name() {
     return this.getAttribute('name')
+  }
+       get season() {
+    return this.getAttribute('season')
+  }
+    get episode() {
+    return this.getAttribute('episode')
+  }
+  get author() {
+    return this.getAttribute('author')
   }
   get theme() {
     return this.getAttribute('theme') || 'light'
@@ -483,4 +620,4 @@ class Media_Details extends HTMLElement {
   }
 }
 
-window.customElements.define("media-element", Media_Details)
+window.customElements.define("media-card", Media_Card)

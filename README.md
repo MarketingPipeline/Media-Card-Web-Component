@@ -1,7 +1,7 @@
-# Media-Element.js
+# Media-Card-Web-Component
 
 <div align="center">
-<a href="https://github.com/MarketingPipeline/Media-Element.js"> <img height="300px" src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"/> </a> 
+<a href="https://github.com/MarketingPipeline/Media-Card-Web-Component"> <img height="300px" src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"/> </a> 
 </div>  
     
 <p align="center">
@@ -10,11 +10,11 @@
   <br>
   <small> <b><i>Show your support!</i> </b></small>
   <br>
-   <a href="https://github.com/MarketingPipeline/Media-Element.js">
-    <img title="Star on GitHub" src="https://img.shields.io/github/stars/MarketingPipeline/Media-Element.js.svg?style=social&label=Star">
+   <a href="https://github.com/MarketingPipeline/Media-Card-Web-Component">
+    <img title="Star on GitHub" src="https://img.shields.io/github/stars/MarketingPipeline/Media-Card-Web-Component.svg?style=social&label=Star">
   </a>
-  <a href="https://github.com/MarketingPipeline/Media-Element.js/fork">
-    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/MarketingPipeline/Media-Element.js.svg?style=social&label=Fork">
+  <a href="https://github.com/MarketingPipeline/Media-Card-Web-Component/fork">
+    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/MarketingPipeline/Media-Card-Web-Component.svg?style=social&label=Fork">
   </a>
    </p>  
 
@@ -24,7 +24,7 @@ A custom web element to easily show off your favorite movies, TV shows & songs!
 
 ## Example and usage
 
-You can view a demo of Media-Element.js in use [here.](https://marketingpipeline.github.io/Media-Element.js/demo)
+You can view a demo of Media-Card-Web-Component in use [here.](https://marketingpipeline.github.io/Media-Card-Web-Component/demo)
 
 
 
@@ -32,7 +32,7 @@ You can view a demo of Media-Element.js in use [here.](https://marketingpipeline
 
 	
  <br>
-<details><summary>How to use <b>Media-Element.js</b>:</summary>
+<details><summary>How to use <b>Media-Card-Web-Component</b>:</summary>
  <br>		
  
 	
@@ -62,9 +62,9 @@ After getting your API key (if required) place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.2/dist/media-element.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
 
 
 
@@ -106,9 +106,9 @@ After getting your API key place it in your HTML document like so
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.2/dist/media-element.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
 
 
 
@@ -147,9 +147,9 @@ Note: You do NOT need a API key to display songs.
 
 
 
-   include this [script](https://github.com/MarketingPipeline/Media-Element.js/blob/main/version/1.0.2/dist/media-element.min.js) at the <b>bottom</b> of your HTML document.
+   include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Element.js/version/1.0.2/dist/media-element.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
 
 
 
@@ -211,19 +211,16 @@ Note: You do NOT need a API key to display songs.
 
 
 
-## Contributing ![GitHub](https://img.shields.io/github/contributors/MarketingPipeline/Media-Element.js)
+## Contributing ![GitHub](https://img.shields.io/github/contributors/MarketingPipeline/Media-Card-Web-Component)
 
 Want to improve this project? Create a pull request with detailed changes / improvements! If approved you will be added to the list of contributors of this awesome project!
 
 See also the list of
-[contributors](https://github.com/MarketingPipeline/Media-Element.js/graphs/contributors) who
+[contributors](https://github.com/MarketingPipeline/Media-Card-Web-Component/graphs/contributors) who
 participate in this project.
 
-## License ![GitHub](https://img.shields.io/github/license/MarketingPipeline/Media-Element.js)
+## License ![GitHub](https://img.shields.io/github/license/MarketingPipeline/Media-Card-Web-Component)
 
 This project is licensed under the GPL-3.0 License - see the
-[LICENSE.md](https://github.com/MarketingPipeline/Media-Element.js/blob/main/LICENSE) file for
+[LICENSE.md](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/LICENSE) file for
 details.
-
-
-
