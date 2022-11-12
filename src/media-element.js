@@ -293,7 +293,7 @@ songAndBookTheme.replaceSync(`/*compress*/
     }
   }
 /*endcompress*/`)
-class Media_Details extends HTMLElement {
+class Media_Card extends HTMLElement {
   static get observedAttributes() {
     return [
       'name',
@@ -620,4 +620,4 @@ this.extraEndPoint = `https://api.themoviedb.org/3/tv/${this.data.id}/season/${t
   }
 }
 
-window.customElements.define("media-element", Media_Details)
+window.customElements.define("media-card", Media_Card)
