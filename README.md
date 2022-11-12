@@ -24,7 +24,7 @@ A custom web element to easily show off your favorite movies, TV shows & songs!
 
 ## Example and usage
 
-You can view a demo of Media-Card-Web-Component in use [here.](https://marketingpipeline.github.io/Media-Card-Web-Component/demo)
+You can view a demo of this Web Component in use [here.](https://marketingpipeline.github.io/Media-Card-Web-Component/demo)
 
 
 
@@ -32,7 +32,7 @@ You can view a demo of Media-Card-Web-Component in use [here.](https://marketing
 
 	
  <br>
-<details><summary>How to use <b>Media-Card-Web-Component</b>:</summary>
+<details><summary>How to use <b>Media Card</b>:</summary>
  <br>		
  
 	
@@ -45,7 +45,7 @@ You can view a demo of Media-Card-Web-Component in use [here.](https://marketing
 	 
    
 ```html
- <media-element name="The Mask (1994)"></media-element>
+ <media-card name="The Mask (1994)"></media-card>
 ```
 
 Note: For movies & TV show a API Key is required from TheMovieDB, songs do NOT require a API key.
@@ -89,7 +89,7 @@ After getting your API key (if required) place it in your HTML document like so
 	 
    
 ```html
- <media-element name="The Twilight Zone (1959)" type="TV"></media-element>
+ <media-card name="The Twilight Zone (1959)" type="TV"></media-card>
 ```
 
 Note: To display TV show(s) - you will require a API key from TheMovieDB.
@@ -135,7 +135,7 @@ After getting your API key place it in your HTML document like so
 	 
 
 ```html
- <media-element name="The Beatles In My Life" type="song"></media-element>
+ <media-card name="The Beatles In My Life" type="song"></media-card>
 ```
 
 Note: You do NOT need a API key to display songs.
