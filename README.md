@@ -64,7 +64,7 @@ After getting your API key (if required) place it in your HTML document like so
 
    include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js" type="module"></script> 
 
 
 
@@ -108,7 +108,7 @@ After getting your API key place it in your HTML document like so
 
    include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js" type="module"></script> 
 
 
 
@@ -149,7 +149,7 @@ Note: You do NOT need a API key to display songs.
 
    include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at the <b>bottom</b> of your HTML document.
          
-    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js" type="module"></script> 
 
 
 
