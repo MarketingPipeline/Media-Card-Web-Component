@@ -1,0 +1,15 @@
+{
+  "name": "Media-Card-Web-Component",
+  "version": "1.0.3",
+  "description": "A web component that allows you to easily fetch / show off details from your favorite anime, movies, TV shows, songs & books!",
+  "author": {
+    "name": "MarketingPipeline",
+    "url": "https://github.com/marketingpipeline/"
+  },
+  "main": "dist/media-card-wc.min.js",
+  "files": [
+    "dist"
+  ],
+  "license": "GPL-3.0",
+  "repository": "github:MarketingPipeline/Code-Runner-Web-Component"
+}
