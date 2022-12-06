@@ -39,6 +39,40 @@ You can view a demo of this Web Component in use [here.](https://marketingpipeli
 <br>	 
 <br>	 
 	
+<details><summary>How to show a <b>Book</b>:</summary>
+	
+### Usage
+	 
+   
+```html
+ <media-card book="Animal Farm"></media-card>
+```
+
+   include this [script](https://github.com/MarketingPipeline/Media-Card-Web-Component/blob/main/dist/media-card-wc.min.js) at in your HTML document.
+         
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Media-Card-Web-Component@v1.0.3/dist/media-card-wc.min.js" type="module"></script> 
+
+
+
+     
+
+
+	   
+	
+<b><i>Note:</b></i> You can show as books as you want! You can also use a ```author``` attribute for a more accurate result. 
+	
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details> 
+
+
+
+
+<br>		
+ 
+	
+<br>	 
+<br>	 
+	
 <details><summary>How to show a <b>Movie</b>:</summary>
 	
 ### Usage
@@ -194,6 +228,7 @@ Note: You do NOT need a API key to display songs.
 <td><code>light</code></td>
 <td>No</td>
 </tr>
+
 
 
 
