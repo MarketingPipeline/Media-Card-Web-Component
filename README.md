@@ -5,7 +5,7 @@
 </div>  
     
 <p align="center">
-  <b>Show off your favourite books, movies, tv shows / anime & songs on your web page!</b>
+  <b>Display details about movies, tv shows, books & songs on any website!</b>
 
   <br>
   <small> <b><i>Show your support!</i> </b></small>
@@ -19,7 +19,7 @@
    </p>  
 
 
-A custom web element to easily show off your favorite movies, TV shows & songs!
+A custom web element to show / fetch details about movies, TV shows, books & songs on any website!
 
 
 ## Example and usage
