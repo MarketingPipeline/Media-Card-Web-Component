@@ -5,7 +5,7 @@
 </div>  
     
 <p align="center">
-  <b>Show off your favourite movies, tv shows & songs on your web page!</b>
+  <b>Show off your favourite books, movies, tv shows / anime & songs on your web page!</b>
 
   <br>
   <small> <b><i>Show your support!</i> </b></small>
@@ -217,7 +217,7 @@ Note: You do NOT need a API key to display songs.
 
 <tr>
 <td>type</td>
-              <td>Type of Media to show details for - options:<code>TV, Song</code>, by default movie type will be shown.</td>
+              <td>Type of Media to show details for - options:<code>TV, Song, Book</code>, by default movie type will be shown.</td>
 <td><code>Movie</code></td>
 <td>No</td>
 </tr>
