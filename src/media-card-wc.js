@@ -1,4 +1,4 @@
-import "https://polyfill.io/v3/polyfill.js?features=Array.prototype.map,fetch,Promise";
+import "https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0features=Array.prototype.map,fetch,Promise";
 import "https://unpkg.com/construct-style-sheets-polyfill";
 
 const mainSheet = new CSSStyleSheet()
