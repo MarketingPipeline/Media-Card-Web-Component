@@ -58,7 +58,7 @@ These Markdown anchors provide a link to the diff for each release. They should 
 updated any time a new release is cut.
 -->
 [2.0.0]: /v2.0.0
-[1.0.2]: /v1.0.3
+[1.0.3]: /v1.0.3
 [1.0.2]: /v1.0.2
 [1.0.1]: /v1.0.1
 [1.0.0]: /v1.0.0
