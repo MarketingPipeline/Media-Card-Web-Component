@@ -1,3 +1,10 @@
+/**!
+ * @license Media-Card-Web-Component - A web component that allows you to easily fetch / show off details from 
+   your favorite anime, movies, TV shows, songs & books!
+ * VERSION: 2.0.1
+ * LICENSED UNDER MIT LICENSE
+ * MORE INFO CAN BE FOUND AT https://github.com/MarketingPipeline/Media-Card-Web-Component/
+*/
 import "https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0features=Array.prototype.map,fetch,Promise";
 import "https://unpkg.com/construct-style-sheets-polyfill";
 
@@ -318,29 +325,7 @@ class Media_Card extends HTMLElement {
     }
 
     this.shadow.adoptedStyleSheets = sheets;
-    this.shadow.innerHTML = `<!--compress-->
-      <div class="media_card skeleton">
-        <div class="info_section">
-          <div class="media_header">
-            <div class="locandina-holding"></div>
-            <img class="locandina"
-                 src=""/>
-            <div class="details">  
-              <h1></h1>
-              <h4></h4>
-              <span class="minutes"></span>
-              <p class="show-minutes"></p>
-              <p class="collection-name"></p>
-              <p class="primary-genre-name"></p>
-            </div>
-          </div>
-          <div class="media_desc">
-            <p class="text"></p>
-          </div>
-        </div>
-        <div class="blur_back"></div>
-      </div>
-    <!--endcompress-->`
+    this.createCard();
     this.card = this.shadow.querySelector('.media_card')
     this.locandina = this.shadow.querySelector('.locandina')
     this.locandinaHolding = this.shadow.querySelector('.locandina-holding')
@@ -561,7 +546,60 @@ this.extraEndPoint = `https://api.themoviedb.org/3/tv/${this.data.id}/season/${t
      
     }
   }
-
+   createCard(){
+    const mediaCard = document.createElement('div');
+    mediaCard.classList.add('media_card', 'skeleton');
+    
+    const infoSection = document.createElement('div');
+    infoSection.classList.add('info_section');
+    
+    const mediaHeader = document.createElement('div');
+    mediaHeader.classList.add('media_header');
+    
+    const locandinaHolding = document.createElement('div');
+    locandinaHolding.classList.add('locandina-holding');
+    
+    const locandina = document.createElement('img');
+    locandina.classList.add('locandina');
+    locandina.setAttribute('src', '');
+    
+    const details = document.createElement('div');
+    details.classList.add('details');
+    
+    const h1 = document.createElement('h1');
+    const h4 = document.createElement('h4');
+    const minutes = document.createElement('span');
+    minutes.classList.add('minutes');
+    const showMinutes = document.createElement('p');
+    showMinutes.classList.add('show-minutes');
+    const collectionName = document.createElement('p');
+    collectionName.classList.add('collection-name');
+    const primaryGenreName = document.createElement('p');
+    primaryGenreName.classList.add('primary-genre-name');
+    
+    details.append(h1, h4, minutes, showMinutes, collectionName, primaryGenreName);
+    
+    mediaHeader.append(locandinaHolding, locandina, details);
+    
+    const mediaDesc = document.createElement('div');
+    mediaDesc.classList.add('media_desc');
+    
+    const text = document.createElement('p');
+    text.classList.add('text');
+    
+    mediaDesc.appendChild(text);
+    
+    infoSection.append(mediaHeader, mediaDesc);
+    
+    const blurBack = document.createElement('div');
+    blurBack.classList.add('blur_back');
+    
+    mediaCard.append(infoSection, blurBack);
+    
+    // Append the media card to the shadow root
+    this.shadowRoot.append(mediaCard);
+ }
+  
   async getDetails() {
     try {
       const response = await fetch(this.endPoint, {
